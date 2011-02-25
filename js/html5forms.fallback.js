@@ -23,13 +23,20 @@ var initSlider = function() {
 		$input.after($slider).hide();
 						
 		$slider.slider({
-			min: $input.attr('min'),
+			//min: $input.attr('min'),
+			min: $input.attr('max'),
 			max: $input.attr('max'),
 			step: $input.attr('step'),
 			change: function(e, ui) {
 				$(this).val(ui.value);
+			
+			
+			// slide: function( event, ui ) {
+			// 				$( "#amount" ).val( ui.value  + " words" );
+			
 			}
 		});
+		$( "#amount" ).val( $( "#slider" ).slider( "value" ));
 	});
 };
 
@@ -46,7 +53,7 @@ var initSpinner = function() {
 	$('input[type=number]').each(function() {
 		var $input = $(this);
 		$input.spinner({
-			min: $input.attr('min'),
+		//	min: $input.attr('min'),
 			max: $input.attr('max'),
 			step: $input.attr('step')
 		});
@@ -54,26 +61,6 @@ var initSpinner = function() {
 };
 if(!Modernizr.inputtypes.number){		
 	$(document).ready(initSpinner);
-};
-
-/* Datepicker
- * input[type=date] fallback
- *
- * using jQuery UI Datepicker
- */
-var initDatepicker = function() {
-	$('input[type=date]').each(function() {
-		var $input = $(this);
-		$input.datepicker({
-			minDate: $input.attr('min'),
-			maxDate: $input.attr('max'),
-			dateFormat: 'yy-mm-dd'
-		});
-	});
-};
-
-if(!Modernizr.inputtypes.date){
-	$(document).ready(initDatepicker);
 };
 
 /* Placeholder
