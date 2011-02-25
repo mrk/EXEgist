@@ -4,22 +4,18 @@ require 'dm-core'
 require 'dm-migrations'
 require 'dm-timestamps'
 
+configure :development do
+  DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/exegist.db")
+end
+
 get '/' do
   @title = "Welcome to EXEgist"
   erb :welcome :layout => false
 end
 
-get '/joyce' do
+get '/paper/:id' do
   @title="Joyce"
   erb :standard 
-end
-
-get '/paper2' do
-  erb :standard
-end
-
-get '/paper3' do
-  erb :standard
 end
 
 

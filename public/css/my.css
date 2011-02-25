@@ -1,0 +1,135 @@
+html,body{
+	margin:0;
+	padding:0;
+	background-color: #333333;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#container{
+	width: 960px;
+	margin: 0 auto;
+	padding:30px 20px;
+	background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+		color-stop(0, rgb(227,227,227)),
+	    color-stop(0.29, rgb(227,227,227)),
+	    color-stop(0.9, rgb(255,255,255))
+	);
+	background-image: -moz-linear-gradient(
+	    center bottom,
+		rgb(227,227,227) 29%,
+	    rgb(255,255,255) 90%
+	);
+	-webkit-box-shadow: 0px 0px 15px #000000;
+	-moz-box-shadow: 0px 0px 15px #000000;
+	box-shadow: 0px 0px 15px #000000;
+}
+
+#thework{
+	float:right;
+	width:660px;
+	line-height: 21px;	
+}
+
+.comment{
+	clear:left;
+	padding:10px 10px 10px 15px;
+	
+	border-left: 1px solid #c7c7c7;
+	/*background-color: #c6d3e1;*/
+	background-color: rgba(255,254,255,0.5);
+	display:none;
+}
+
+.marker{
+	font-size: 30px;
+	vertical-align: text-top;
+	line-height: 21px;
+	text-decoration: none;
+}
+
+h1{
+	font-size: 64px;
+	line-height: .2;
+}
+
+h2 {
+	font-size: 30px;
+}
+
+a{
+	color: #7098ad;
+}
+
+#sidebar{
+	float:left;
+	width:250px;
+	/*border-right: 1px solid #ddd;*/
+	border-radius: 10px;  
+	-moz-border-radius: 10px;  
+ 	-webkit-border-radius: 10px;
+ 	background-color: #f6f2f5;
+ 	padding: 10px;
+	border: thin solid #c8c8c8;
+}  
+	
+}
+#logo, #comment_length, #contributors{
+	min-height:50px;
+	border-style:1px solid black;
+}
+
+#contributors ul li{
+	list-style-type: none;
+	list-style-position: outside;
+	text-indent:-35px;
+}
+
+#logo{
+	color: #7098ad;
+	text-shadow: 0 1px 0 #000;  
+ }  
+
+.wc{
+	color:blue;
+}	
+#login{
+	clear:both;
+}
+form {
+	overflow: hidden;
+	clear: both;
+label{
+	clear: left;
+	float: left;
+	width: 41%;
+	padding-right: 2%;
+	height: 1em;
+	margin-bottom: 10px;
+	
+	text-align: right;
+}
+input{
+	float: left;
+	height: 1em;	
+	margin-bottom: 15px;
+}
+button {
+	float: left;
+	clear: both;
+	margin-left: 43%;
+	
+	display: inline;
+}
+/* Slider */
+.slider {
+	float: left;	
+    width: 49%;
+	margin: 10px 0px 20px 10px;
+}
+/* Spinner */
+.ui-spinner {
+	float: left;
+}

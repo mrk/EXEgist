@@ -1,24 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
 	<head>
-		<title>The Site</title>
-		<script type="text/javascript" src="js/jquery-1.5.min.js"></script>
-		
-		<!-- HTML5 Shim, IE8 and bellow recognize HTML5 elements -->
+		<title>EXEgist</title>	
 		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->		
 		<!-- Modernizr -->
 		<script src="js/modernizr-1.5.min.js"></script>
 		<!-- Webforms2 -->
-		<!-- <script src="webforms2/webforms2-p.js"></script>	 -->
+		<script src="webforms2/webforms2-p.js"></script>	
 		<!-- jQuery and jQuery UI -->
 		<link rel="stylesheet" href="ui-themes/aristo/jquery.ui.all.css"> 
+		<script type="text/javascript" src="js/jquery-1.5.min.js"></script>
 		<script src="js/jquery-ui-1.8.5.min.js"></script>
 		<!-- jQuery Numeric Spinner -->	
-		<!-- <link rel="stylesheet" href="components/spinner/ui.spinner.css"> 
-				<script src="components/spinner/ui.spinner.js"></script>
-				<script src="js/html5forms.fallback.js"></script> -->
-		<!-- jQuery Placehol -->
-		<!--<script src="components/placeholder/jquery.placehold-0.2.min.js"></script>-->
+		<link rel="stylesheet" href="components/spinner/ui.spinner.css"> 
+		<script src="components/spinner/ui.spinner.js"></script>
+		
+		<link rel="stylesheet" href="css/html5forms.layout.css">
+		<script src="js/html5forms.js"></script>
+		<script src="js/html5forms.fallback.js"></script>
 		
 		
 		
@@ -33,10 +32,11 @@
 					//if the display is none
 					var comments_seen = $('.comment').css('display')
 					if (comments_seen == 'none') {
+						//slide the comment block down
 						$('.comment').slideDown('slow').css("display","block");
 					} else {
+						//if it's already down, slide up
 						$('.comment').slideUp('slow');
-						//$('.comment').css("display","none");
 					}
 				});
 				
@@ -45,13 +45,10 @@
 				var words = $('.comment').text().split(" ");
 				//count the words in a comment.
 				var wordcount = words.length;
-				//show the # of words in a comment at the end?
-				//$('#thework p').append("<p class="wc">There are " + wordcount + "words in the comment.</p>");
 				//WOOHOO!! So, no need to show it, but will be useful for Minimum length.
 				
 				//ANNOTATION TOGGLE
 				var commentOn = false;
-				//$('#annotation a #amIOn').append('<span id="amIOn">OFF</span>');
 				
 				$('#annotation a').click(function(){
 					//console.log("here");
@@ -60,19 +57,8 @@
 					//DO THE REST IN SINATRA
 					//var sentences = $('#thework p').text().split(".");
 					//$(sentences).wrap('<span class="aSentence" />');
+					//You cannot parse the sentences in jQuery, but if you do it via Sinatra, it will work.
 				});
-				
-				
-				
-				//SPLIT UP SENTENCES
-				// if(commentOn == true){
-				// 					var sentences = $('#thework p').text().split(".");
-				// 					//MAKE SENTENCES CLICKABLE IF ANNOTATION IS ON
-				// 					//SURROUND EACH SENTENCE WITH A SPAN TAG.
-				// 					$(sentences).wrap('<span class="aSentence" />');
-				// 				
-				// 				}
-				
 		
 			});
 		</script>
@@ -85,8 +71,6 @@ DONE			- Count the number of words in a comment.
 			!!! Store the number of periods so this is period #50 and it has 3 comments and that correlates to the sentence which ends with period #50.
 			
 			CONTENT AREA
-DONE			- comment area appearing and disappearing. 
-DONE			- if there's a comment somewhere, have the star appear to indicate it.
 			- Have the number in the circle show the number of comments in a paragraph. class.count.
 			? is there an add comment field when you open up an existing comment area? 
 			
@@ -96,7 +80,7 @@ DONE			- if there's a comment somewhere, have the star appear to indicate it.
 			
 			
 			COMMENT LENGTH
-DONEISH			- Create a field that has a numeric spinner
+DONEISH			- Create a field that has a numeric spinner. FIX IN FF
 DONE			- Comment length can't go below 0
 NN			- Comment length max goes up if comment word count goes beyond 100.
 			
@@ -104,7 +88,7 @@ NN			- Comment length max goes up if comment word count goes beyond 100.
 			Requires DB, loads all the userid's from all who commented on the article.
 			
 			KEYBOARD SHORTCUTS
-nn			- turn on "begin annotation" with a keystroke.
+NN			- turn on "begin annotation" with a keystroke.
 			
 			CSS & JS
 			- floating circle with the number of comments in it floating next to each paragraph that is not distracting.  Poll 1/min
@@ -113,44 +97,7 @@ nn			- turn on "begin annotation" with a keystroke.
 			Ruby
 			http://stackoverflow.com/questions/4119113/lazy-registration-with-sinatra-and-datamapper
 		-->
-		<style>
-			body{
-				padding: 20px;
-			}
-			#container{
-				width:960px;
-				margin: 0 auto;
-			}
-			#thework{
-				float:right;
-				width:660px;
-				
-			}
-			#sidebar{
-				float:left;
-				width:300px;
-				
-			}
-			#logo, #comment_length, #contributors{
-				min-height:50px;
-				border-style:1px solid black;
-			}
-			
-			.comment{
-				clear:left;
-				padding-left:10px;
-				border-left:1px solid black;
-				background-color:red;
-				display:none;
-			}
-			
-			.wc{
-				color:blue;
-			}	
-			#login{
-				clear:both;
-			}
-		</style>
+	<link rel="stylesheet" type="text/css" href="css/my.css" />
 	</head>
 	<body>
 		<div id="container">
@@ -171,7 +118,7 @@ nn			- turn on "begin annotation" with a keystroke.
 				</div>
 				<div id="comment_depth">
 					<h3>Comment Depth</h3>
-					<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
+					<input type="number" name="numeric-spinner" id="numeric-spinner" class="ui-spinner" value="2" min="0">
 				</div>
 				<div id="comment length">
 					<h3>Comment Length</h3>
