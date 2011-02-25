@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+	<head>
+		<title>The Site</title>
+		<script type="text/javascript" src="js/jquery-1.5.min.js"></script>
+		
+		<!-- HTML5 Shim, IE8 and bellow recognize HTML5 elements -->
+		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->		
+		<!-- Modernizr -->
+		<script src="js/modernizr-1.5.min.js"></script>
+		<!-- Webforms2 -->
+		<!-- <script src="webforms2/webforms2-p.js"></script>	 -->
+		<!-- jQuery and jQuery UI -->
+		<link rel="stylesheet" href="ui-themes/aristo/jquery.ui.all.css"> 
+		<script src="js/jquery-ui-1.8.5.min.js"></script>
+		<!-- jQuery Numeric Spinner -->	
+		<!-- <link rel="stylesheet" href="components/spinner/ui.spinner.css"> 
+				<script src="components/spinner/ui.spinner.js"></script>
+				<script src="js/html5forms.fallback.js"></script> -->
+		<!-- jQuery Placehol -->
+		<!--<script src="components/placeholder/jquery.placehold-0.2.min.js"></script>-->
+		
+		
+		
+		<script type="text/javascript">
+			$ (function(){
+				
+				//IF SPAN EXISTS, SHOW ASTERISK
+				$('.comment').before('<a href="#" class="marker">*</a>');
+				
+				//COMMENTS APPEAR AND DISAPPEAR WITH CLICK OF ASTERISK
+				$('.marker').click(function(){
+					//if the display is none
+					var comments_seen = $('.comment').css('display')
+					if (comments_seen == 'none') {
+						$('.comment').slideDown('slow').css("display","block");
+					} else {
+						$('.comment').slideUp('slow');
+						//$('.comment').css("display","none");
+					}
+				});
+				
+				//COMMENT WORD COUNT
+				//split up the words
+				var words = $('.comment').text().split(" ");
+				//count the words in a comment.
+				var wordcount = words.length;
+				//show the # of words in a comment at the end?
+				//$('#thework p').append("<p class="wc">There are " + wordcount + "words in the comment.</p>");
+				//WOOHOO!! So, no need to show it, but will be useful for Minimum length.
+				
+				//ANNOTATION TOGGLE
+				var commentOn = false;
+				//$('#annotation a #amIOn').append('<span id="amIOn">OFF</span>');
+				
+				$('#annotation a').click(function(){
+					//console.log("here");
+					$('#annotation p').toggle();
+					commentOn = true;
+					//DO THE REST IN SINATRA
+					//var sentences = $('#thework p').text().split(".");
+					//$(sentences).wrap('<span class="aSentence" />');
+				});
+				
+				
+				
+				//SPLIT UP SENTENCES
+				// if(commentOn == true){
+				// 					var sentences = $('#thework p').text().split(".");
+				// 					//MAKE SENTENCES CLICKABLE IF ANNOTATION IS ON
+				// 					//SURROUND EACH SENTENCE WITH A SPAN TAG.
+				// 					$(sentences).wrap('<span class="aSentence" />');
+				// 				
+				// 				}
+				
+		
+			});
+		</script>
+		<!--
+			OOP
+DONE			- Count the number of words in a comment.
+			var comments = $('#thework p .comment').count;
+			- When the page loads, you need to also add all the comments, which are stored in a db.  Click on any sentence and it will look for the closest period(.) after the point where you clicked.  It will then highlight from that period to the period previous.
+			- If comments are not all on by default, it only load the comments that are in the window.  Too much?
+			!!! Store the number of periods so this is period #50 and it has 3 comments and that correlates to the sentence which ends with period #50.
+			
+			CONTENT AREA
+DONE			- comment area appearing and disappearing. 
+DONE			- if there's a comment somewhere, have the star appear to indicate it.
+			- Have the number in the circle show the number of comments in a paragraph. class.count.
+			? is there an add comment field when you open up an existing comment area? 
+			
+			NEW COMMENT
+			- For now, hyperlink a p that you click to add the comment field and the button.
+			- If you click on a sentence, you can add a comment. Requires DB to hold the periods, collect the comments, and then run it asynchronously, ie-the form submitter that Zeven has done.
+			
+			
+			COMMENT LENGTH
+DONEISH			- Create a field that has a numeric spinner
+DONE			- Comment length can't go below 0
+NN			- Comment length max goes up if comment word count goes beyond 100.
+			
+			CONTRIBUTORS
+			Requires DB, loads all the userid's from all who commented on the article.
+			
+			KEYBOARD SHORTCUTS
+nn			- turn on "begin annotation" with a keystroke.
+			
+			CSS & JS
+			- floating circle with the number of comments in it floating next to each paragraph that is not distracting.  Poll 1/min
+			
+			REGISTRATION
+			Ruby
+			http://stackoverflow.com/questions/4119113/lazy-registration-with-sinatra-and-datamapper
+		-->
+		<style>
+			body{
+				padding: 20px;
+			}
+			#container{
+				width:960px;
+				margin: 0 auto;
+			}
+			#thework{
+				float:right;
+				width:660px;
+				
+			}
+			#sidebar{
+				float:left;
+				width:300px;
+				
+			}
+			#logo, #comment_length, #contributors{
+				min-height:50px;
+				border-style:1px solid black;
+			}
+			
+			.comment{
+				clear:left;
+				padding-left:10px;
+				border-left:1px solid black;
+				background-color:red;
+				display:none;
+			}
+			
+			.wc{
+				color:blue;
+			}	
+			#login{
+				clear:both;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div id="thework">
+				<h2>Title</h2>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.<span class="comment"> Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</span> Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+			</div>
+			<div id="sidebar">
+				<div id="logo">
+					<h1>EXEgist</h1>
+				</div>
+				<div id="annotation">
+					<a href="#">
+						<p>Annotation OFF</p>
+						<p style="display:none">Annotation On</p>
+						</a>
+				</div>
+				<div id="comment_depth">
+					<h3>Comment Depth</h3>
+					<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
+				</div>
+				<div id="comment length">
+					<h3>Comment Length</h3>
+					<label for="amount">Minimum:</label>
+					<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25">
+				</div>
+				<div id="contributors">
+					<h3>Contributors</h3>
+					<ul>
+						<li>cshirky</li>
+						<li>tomberenger</li>
+						<li>dreamsverse</li>
+						<li>baltarismyhomeboy</li>
+					</ul>
+				</div>
+			</div>
+			<div id="login">
+				<form action="/login" method="post" id="login">
+					<label>Login:</label><br />
+					<input type="email" cols="5" name="email" id="email">
+					<input type="password" cols="5" name="password" id="password">
+					<input type="submit">
+				</form>
+			</div>
+			<div id="submit_comment">
+				<form action="/newcomment" method="post" id="newcomment">
+					<label>Comment:</label><br />
+					<input type="textarea" cols="5" rows="30" name="comment" id="comment">
+					<input type="submit">
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
