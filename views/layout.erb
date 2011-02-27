@@ -1,8 +1,124 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
+<html lang="en">
 	<head>
-		<title></title>
+		<title>The Site</title>
+		<script type="text/javascript" src="js/jquery-1.5.min.js"></script>		
+		<!-- HTML5 Shim, IE8 and bellow recognize HTML5 elements -->
+		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->		
+		<!-- Modernizr -->
+		<script src="js/modernizr-1.5.min.js"></script>
+
+		<link rel="stylesheet" href="ui-themes/aristo/jquery.ui.all.css"> 
+		<script src="js/jquery-ui-1.8.5.min.js"></script>
+
+		
+		<script type="text/javascript">
+			$ (function(){
+				
+				//IF SPAN EXISTS, SHOW ASTERISK
+				$('.comment').before('<a href="#" class="marker">*</a>');
+				
+				//COMMENTS APPEAR AND DISAPPEAR WITH CLICK OF ASTERISK
+				$('.marker').click(function(){
+					//if the display is none
+					var comments_seen = $('.comment').css('display')
+					if (comments_seen == 'none') {
+						$('.comment').slideDown('slow').css("display","block");
+					} else {
+						$('.comment').slideUp('slow');
+						//$('.comment').css("display","none");
+					}
+				});
+				
+				//COMMENT WORD COUNT
+				//split up the words
+				var words = $('.comment').text().split(" ");
+				//count the words in a comment.
+				var wordcount = words.length;
+				//show the # of words in a comment at the end?
+				//$('#thework p').append("<p class="wc">There are " + wordcount + "words in the comment.</p>");
+				//WOOHOO!! So, no need to show it, but will be useful for Minimum length.
+				
+				//ANNOTATION TOGGLE
+				var commentOn = false;
+				//$('#annotation a #amIOn').append('<span id="amIOn">OFF</span>');
+				
+				$('#annotation a').click(function(){
+					//console.log("here");
+					$('#annotation p').toggle();
+					commentOn = true;
+					//DO THE REST IN SINATRA
+					//var sentences = $('#thework p').text().split(".");
+					//$(sentences).wrap('<span class="aSentence" />');
+				});
+				
+				
+				
+				//SPLIT UP SENTENCES
+				// if(commentOn == true){
+				// 					var sentences = $('#thework p').text().split(".");
+				// 					//MAKE SENTENCES CLICKABLE IF ANNOTATION IS ON
+				// 					//SURROUND EACH SENTENCE WITH A SPAN TAG.
+				// 					$(sentences).wrap('<span class="aSentence" />');
+				// 				
+				// 				}
+				
+		
+			});
+		</script>
+		
+		<link rel="stylesheet" type="text/css" href="css/my.css" />
 	</head>
 	<body>
-	</body>
+		<div id="container">
+			<div id="thework">
+		<%= yield %>
+		
+	</div>
+	<div id="sidebar">
+		<div id="logo">
+			<h1>EXEgist</h1>
+		</div>
+		<div id="annotation">
+			<a href="#">
+				<p>Annotation OFF</p>
+				<p style="display:none">Annotation On</p>
+				</a>
+		</div>
+		<div id="comment_depth">
+			<h3>Comment Depth</h3>
+			<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
+		</div>
+		<div id="comment length">
+			<h3>Comment Length</h3>
+			<label for="amount">Minimum:</label>
+			<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25">
+		</div>
+		<div id="contributors">
+			<h3>Contributors</h3>
+			<ul>
+				<li>cshirky</li>
+				<li>tomberenger</li>
+				<li>dreamsverse</li>
+				<li>baltarismyhomeboy</li>
+			</ul>
+		</div>
+	</div>
+	<div id="login">
+		<form action="/login" method="post" id="login">
+			<label>Login:</label><br />
+			<input type="email" cols="5" name="email" id="email">
+			<input type="password" cols="5" name="password" id="password">
+			<input type="submit">
+		</form>
+	</div>
+	<div id="submit_comment">
+		<form action="/newcomment" method="post" id="newcomment">
+			<label>Comment:</label><br />
+			<input type="textarea" cols="5" rows="30" name="comment" id="comment">
+			<input type="submit">
+		</form>
+	</div>
+</div>
+</body>
 </html>

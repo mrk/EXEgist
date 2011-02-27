@@ -4,13 +4,17 @@ require 'dm-core'
 require 'dm-migrations'
 require 'dm-timestamps'
 
+
+#NOTE ON COMMENTS
+#if we say that a comment is a child of another comment, that may solve our subcomments issue.
+
 configure :development do
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/exegist.db")
 end
 
 get '/' do
   @title = "Welcome to EXEgist"
-  erb :welcome :layout => false
+  erb :welcome
 end
 
 get '/wallace' do
@@ -27,6 +31,8 @@ get '/fanfic' do
   @title="(fanfic name)"
   erb :fanfic 
 end
+
+
 
 
 
