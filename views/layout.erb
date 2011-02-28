@@ -71,17 +71,19 @@
 	</head>
 	<body>
 		<div id="container">
-			<div id="login">
-				<form action="/login" method="post" id="user_login">
-					<label>Login:</label><br />
-					<input type="email" cols="5" name="email" id="email">
-					<input type="password" cols="5" name="password" id="password">
-					<input type="submit">
-				</form>
-			</div>
-			<div id="thework">
-				<%= yield %>
+			<div id="login_work">
+				<div id="login">
+					<form action="/login" method="post" id="user_login">
+						<label>Login:</label><br />
+						<input type="email" cols="5" name="email" id="email">
+						<input type="password" cols="5" name="password" id="password">
+						<input type="submit">
+					</form>
+				</div>
+				<div id="thework">
+					<%= yield %>
 		
+				</div>
 			</div>
 			<div id="sidebar">
 				<div id="logo">
