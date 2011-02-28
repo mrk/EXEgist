@@ -3,6 +3,7 @@ require 'sinatra'
 require 'dm-core'
 require 'dm-migrations'
 require 'dm-timestamps'
+require 'dm-validations'
 
 
 #NOTE ON COMMENTS
@@ -28,7 +29,7 @@ class User
       :is_unique => "That email address is already registered.",
       :format => "Please provide a valid email address."
       }
-  property :password,   String, 
+  property :password,   String
   property :created_at, DateTime
   
   has n, :comments
