@@ -4,6 +4,10 @@ require 'dm-core'
 require 'dm-migrations'
 require 'dm-timestamps'
 
+
+#NOTE ON COMMENTS
+#if we say that a comment is a child of another comment, that may solve our subcomments issue.
+
 configure :development do
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/exegist.db")
 end
@@ -64,14 +68,10 @@ end
 
 post '/newuser' do
   @user         = User.new(params[:user])
-  if @ad.save
-    path = File.join(Dir.pwd, "/public/ads", @ad.filename)
-    File.open(path, "wb") do |f|
-      f.write(params[:image][:tempfile].read)
-    end
-    redirect "/show/#{@ad.id}"
+  if @user.save
+    redirect("/")
   else
-    redirect('/list')
+    redirect('/')
   end
 end
 
@@ -89,6 +89,8 @@ get '/fanfic' do
   @title="(fanfic name)"
   erb :fanfic 
 end
+
+
 
 
 
