@@ -71,54 +71,54 @@
 	</head>
 	<body>
 		<div id="container">
+			<div id="login">
+				<form action="/login" method="post" id="user_login">
+					<label>Login:</label><br />
+					<input type="email" cols="5" name="email" id="email">
+					<input type="password" cols="5" name="password" id="password">
+					<input type="submit">
+				</form>
+			</div>
 			<div id="thework">
-		<%= yield %>
+				<%= yield %>
 		
+			</div>
+			<div id="sidebar">
+				<div id="logo">
+				<h1>EXEgist</h1>
+			</div>
+			<div id="annotation">
+				<a href="#">
+					<p>Annotation OFF</p>
+					<p style="display:none">Annotation On</p>
+					</a>
+			</div>
+			<div id="comment_depth">
+				<h3>Comment Depth</h3>
+				<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
+			</div>
+			<div id="comment length">
+				<h3>Comment Length</h3>
+				<label for="amount">Minimum:</label>
+				<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25">
+			</div>
+			<div id="contributors">
+				<h3>Contributors</h3>
+				<ul>
+					<li>cshirky</li>
+					<li>tomberenger</li>
+					<li>dreamsverse</li>
+					<li>baltarismyhomeboy</li>
+				</ul>
+			</div>
+		</div>
+		<div id="submit_comment">
+			<form action="/newcomment" method="post" id="newcomment">
+				<label>Comment:</label><br />
+				<input type="textarea" cols="5" rows="30" name="comment" id="comment">
+				<input type="submit">
+			</form>
+		</div>
 	</div>
-	<div id="sidebar">
-		<div id="logo">
-			<h1>EXEgist</h1>
-		</div>
-		<div id="annotation">
-			<a href="#">
-				<p>Annotation OFF</p>
-				<p style="display:none">Annotation On</p>
-				</a>
-		</div>
-		<div id="comment_depth">
-			<h3>Comment Depth</h3>
-			<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
-		</div>
-		<div id="comment length">
-			<h3>Comment Length</h3>
-			<label for="amount">Minimum:</label>
-			<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25">
-		</div>
-		<div id="contributors">
-			<h3>Contributors</h3>
-			<ul>
-				<li>cshirky</li>
-				<li>tomberenger</li>
-				<li>dreamsverse</li>
-				<li>baltarismyhomeboy</li>
-			</ul>
-		</div>
-	</div>
-	<div id="login">
-		<form action="/login" method="post" id="login">
-			<label>Login:</label><br />
-			<input type="email" cols="5" name="email" id="email">
-			<input type="password" cols="5" name="password" id="password">
-			<input type="submit">
-		</form>
-	</div>
-	<div id="submit_comment">
-		<form action="/newcomment" method="post" id="newcomment">
-			<label>Comment:</label><br />
-			<input type="textarea" cols="5" rows="30" name="comment" id="comment">
-			<input type="submit">
-		</form>
-	</div>
-</div>
 </body>
 </html>

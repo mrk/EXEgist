@@ -94,9 +94,6 @@ a{
 
 .wc{
 	color:blue;
-}	
-#login{
-	clear:both;
 }
 form {
 	overflow: hidden;
@@ -132,4 +129,8 @@ button {
 /* Spinner */
 .ui-spinner {
 	float: left;
+}
+
+#login {
+	float: right;
 }
