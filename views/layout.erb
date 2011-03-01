@@ -21,7 +21,7 @@
 				//COMMENTS APPEAR AND DISAPPEAR WITH CLICK OF ASTERISK
 				$('.marker').click(function(){
 					//if the display is none
-					var comments_seen = $('.comment').css('display')
+					var comments_seen = $('.comment').css('display');
 					if (comments_seen == 'none') {
 						$('.comment').slideDown('slow').css("display","block");
 					} else {
@@ -63,6 +63,38 @@
 				// 				
 				// 				}
 				
+				
+				//NEW COMMENT
+				$('#newcmt').click(function(){
+					$('#newcmt').after('<span id="mynewcomment"></span>');
+					var new_cmt_seen = $('#mynewcomment').css('display');
+					if (new_cmt_seen == 'none') {
+						$('#mynewcomment').slideDown('fast').css("display","block");
+					} else {
+						
+						//$('.comment').css("display","none");
+					}
+					//have it create element of a span tag
+				//$(this).attribute('id','');
+					//load the newCommment page
+					if( !$('#thecomment').is(':visible') ) {
+						// it's not visible, do something
+						$('#mynewcomment').load('/newcomment', function(){
+
+						});
+				
+					} else {
+					    // it's visible so do nothing
+					}
+				});
+				
+				//SUBMIT COMMENT !! NOT WORKING EVEN REMOTELY
+				// $('#commentSubmit').click(function(){
+				// 					console.log("here");
+				// 					//$('#mynewcomment').slideUp('slow');
+				// 					$.post("/postcomment");
+				// 				});
+				
 		
 			});
 		</script>
@@ -73,12 +105,12 @@
 		<div id="container">
 			<div id="login_work">
 				<div id="login">
-					<form action="/login" method="post" id="user_login">
-						<label>Login:</label><br />
-						<input type="email" cols="5" name="email" id="email">
-						<input type="password" cols="5" name="password" id="password">
-						<input type="submit">
-					</form>
+					<!-- <form action="/login" method="post" id="user_login">
+											<label>Login:</label><br />
+											<input type="email" cols="5" name="email" id="email">
+											<input type="password" cols="5" name="password" id="password">
+											<input type="submit">
+										</form> -->
 				</div>
 				<div id="thework">
 					<%= yield %>

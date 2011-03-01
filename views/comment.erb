@@ -1,0 +1,17 @@
+<h2>New Comment</h2>
+<form action="" name="thecomment" id="thecomment">
+	<input type="textarea" rows="20" cols="20" name="comment" id="comment" value="thanks!"><br />
+	<input type="submit" id="commentSubmit" value="Submit" />
+</form>
+
+<script type="text/javascript">
+	$('#commentSubmit').click(function(){
+		console.log("here");
+		$('#mynewcomment').slideUp('slow');
+		$.post("/postcomment", $("#thecomment").serialize());
+		
+        return false;
+		$('/newcomment').unload( function () { alert("Bye now!"); } );
+
+	});
+</script>

@@ -49,12 +49,23 @@ class Comment                            # classes map to tables
   belongs_to :user 
 end
 
+class TestComment
+  include DataMapper::Resource
+  
+  property :id,         Serial
+  property :comment,    Text
+  property :created_at, DateTime
+
+end
+
+
 configure :development do
   DataMapper .auto_upgrade!
 end
   
-
-
+before do
+  headers "Content-Type" => "text/html; charset=utf-8"
+end
 
 get '/' do
   @title = "Welcome to EXEgist"
@@ -88,6 +99,18 @@ end
 get '/fanfic' do
   @title="(fanfic name)"
   erb :fanfic 
+end
+
+get '/newcomment' do
+  erb :comment, :layout => false
+end
+
+post '/postcomment' do
+  @comment = TestComment.new(params[:thecomment])
+  @comment.save
+  #  redirect("/fanfic")
+  #else
+  #end
 end
 
 

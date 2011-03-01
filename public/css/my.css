@@ -37,7 +37,7 @@ html,body{
 	clear:both;
 }
 
-.comment{
+.comment, #mynewcomment{
 	clear:left;
 	padding:10px 10px 10px 15px;
 	
