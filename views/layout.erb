@@ -66,27 +66,21 @@
 				
 				//NEW COMMENT
 				$('#newcmt').click(function(){
-					if (commentOn == true){
-						$('#newcmt').after('<span id="mynewcomment"></span>');
-						var new_cmt_seen = $('#mynewcomment').css('display');
-						if (new_cmt_seen == 'none') {
-							$('#mynewcomment').slideDown('fast').css("display","block");
-						} else {
-						
-							//$('.comment').css("display","none");
-						}
-						//have it create element of a span tag
-					//$(this).attribute('id','');
+					if( !$('#thecomment').is(':visible') ) {
+						// it's not visible,
+						if (commentOn == true){
+							$('#newcmt').after('<span id="mynewcomment"></span>');
+							var new_cmt_seen = $('#mynewcomment').css('display');
+							if (new_cmt_seen == 'none') {
+								$('#mynewcomment').slideDown('fast').css("display","block");
+							} else {
+							}
 						//load the newCommment page
-						if( !$('#thecomment').is(':visible') ) {
-							// it's not visible, do something
 							$('#mynewcomment').load('/newcomment', function(){
-
 							});
-				
-						} else {
-						    // it's visible so do nothing
-						}
+					}
+					} else {
+					    // it's visible so do nothing
 					}
 				});
 				
@@ -125,8 +119,8 @@
 			</div>
 			<div id="annotation">
 				<a href="#">
-					<p>Annotation OFF</p>
-					<p style="display:none">Annotation On</p>
+					<p>Read Comments</p>
+					<p style="display:none">Add a Comment</p>
 					</a>
 			</div>
 			<div id="comment_depth">
@@ -134,7 +128,7 @@
 				<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
 			</div>
 			<div id="comment length">
-				<h3>Comment Length</h3>
+				<h3>Comments: Short or Long</h3>
 				<label for="amount">Minimum:</label>
 				<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25">
 			</div>
