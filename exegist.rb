@@ -29,6 +29,7 @@ class User
       :is_unique => "That email address is already registered.",
       :format => "Please provide a valid email address."
       }
+
   property :password,   String
   property :created_at, DateTime
   
@@ -56,10 +57,9 @@ end
 
 
 
-
 get '/' do
   @title = "Welcome to EXEgist"
-  #erb :welcome, :layout => false    #(SYNTAX ERROR)
+  erb :welcome
 end
 
 get '/register' do
