@@ -66,25 +66,27 @@
 				
 				//NEW COMMENT
 				$('#newcmt').click(function(){
-					$('#newcmt').after('<span id="mynewcomment"></span>');
-					var new_cmt_seen = $('#mynewcomment').css('display');
-					if (new_cmt_seen == 'none') {
-						$('#mynewcomment').slideDown('fast').css("display","block");
-					} else {
+					if (commentOn == true){
+						$('#newcmt').after('<span id="mynewcomment"></span>');
+						var new_cmt_seen = $('#mynewcomment').css('display');
+						if (new_cmt_seen == 'none') {
+							$('#mynewcomment').slideDown('fast').css("display","block");
+						} else {
 						
-						//$('.comment').css("display","none");
-					}
-					//have it create element of a span tag
-				//$(this).attribute('id','');
-					//load the newCommment page
-					if( !$('#thecomment').is(':visible') ) {
-						// it's not visible, do something
-						$('#mynewcomment').load('/newcomment', function(){
+							//$('.comment').css("display","none");
+						}
+						//have it create element of a span tag
+					//$(this).attribute('id','');
+						//load the newCommment page
+						if( !$('#thecomment').is(':visible') ) {
+							// it's not visible, do something
+							$('#mynewcomment').load('/newcomment', function(){
 
-						});
+							});
 				
-					} else {
-					    // it's visible so do nothing
+						} else {
+						    // it's visible so do nothing
+						}
 					}
 				});
 				
