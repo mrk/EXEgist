@@ -1,0 +1,36 @@
+<script type="text/javascript" src="js/jquery-1.5.min.js"></script>		
+	
+<script>
+	$('.newcomment')onClick(function(){
+		//have it create element of a span tag
+		$('.newcomment').after('<span></span>').attribute('id','mynewcomment')
+		//load the newCommment page
+		$('#mynewcomment').load('/newcomment', function(){
+			
+		});
+	});
+	
+	$('#commentSubmit').click(function(){
+		//$.post('/postcomment')
+		// Assign handlers immediately after making the request,
+		    // and remember the jqxhr object for this request
+		    var jqxhr = $.post("/postcomment", function() {
+		      alert("success");
+		    })
+		    .success(function() { alert("second success"); })
+		    .error(function() { alert("error"); })
+		    .complete(function() { alert("complete"); });
+
+		    // perform other work here ...
+
+		    // Set another completion function for the request above
+		    jqxhr.complete(function(){ alert("second complete"); });
+		//send submit to post...not sure what serialize is about
+		
+		//close the newcomment span
+		//reload the comments, so that it includes the latest submissions.
+	});
+</script>
+<body>
+<a href="" id="newcomment">click</a>
+</body>

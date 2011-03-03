@@ -50,12 +50,32 @@ class Comment                            # classes map to tables
   belongs_to :user 
 end
 
+class TestComment
+  include DataMapper::Resource
+  
+  property :id,         Serial
+  property :username,   String
+  property :comment,    Text
+  property :created_at, DateTime
+
+end
+
+class Paper
+  include DataMapper::Resource
+  
+  property :id,         Serial
+  property :body,       Text
+  
+end
+
+
 configure :development do
   DataMapper .auto_upgrade!
 end
   
-
-
+before do
+  headers "Content-Type" => "text/html; charset=utf-8"
+end
 
 get '/' do
   @title = "Welcome to EXEgist"
@@ -76,6 +96,25 @@ post '/newuser' do
   end
 end
 
+get '/papers/new' do
+  erb :newpaper
+end
+
+post '/papers/new' do
+  @newpaper = Paper.new(:body => params[:body])
+  if @newpaper.save
+    redirect '/papers/' + @newpaper.id.to_s
+  else
+    "sorry, did not save"
+  end
+end
+
+get '/papers/:id' do
+  @paper = Paper.get(params[:id])
+  @paperArray = @paper.body.split('.')
+  erb :paper
+end
+
 get '/wallace' do
   @title="E Unibus Plurum"
   erb :wallace 
@@ -89,6 +128,18 @@ end
 get '/fanfic' do
   @title="(fanfic name)"
   erb :fanfic 
+end
+
+get '/newcomment' do
+  erb :comment, :layout => false
+end
+
+post '/postcomment' do
+  @comment = TestComment.new(params[:thecomment])
+  @comment.save
+  #  redirect("/fanfic")
+  #else
+  #end
 end
 
 
