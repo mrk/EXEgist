@@ -53,9 +53,18 @@ class TestComment
   include DataMapper::Resource
   
   property :id,         Serial
+  property :username,   String
   property :comment,    Text
   property :created_at, DateTime
 
+end
+
+class Paper
+  include DataMapper::Resource
+  
+  property :id,         Serial
+  property :body,       Text
+  
 end
 
 
@@ -84,6 +93,25 @@ post '/newuser' do
   else
     redirect('/')
   end
+end
+
+get '/papers/new' do
+  erb :newpaper
+end
+
+post '/papers/new' do
+  @newpaper = Paper.new(:body => params[:body])
+  if @newpaper.save
+    redirect '/papers/' + @newpaper.id.to_s
+  else
+    "sorry, did not save"
+  end
+end
+
+get '/papers/:id' do
+  @paper = Paper.get(params[:id])
+  @paperArray = @paper.body.split('.')
+  erb :paper
 end
 
 get '/wallace' do

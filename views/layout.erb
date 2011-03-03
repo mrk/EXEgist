@@ -2,14 +2,14 @@
 <html lang="en">
 	<head>
 		<title>The Site</title>
-		<script type="text/javascript" src="js/jquery-1.5.min.js"></script>		
+		<script type="text/javascript" src="/js/jquery-1.5.min.js"></script>		
 		<!-- HTML5 Shim, IE8 and bellow recognize HTML5 elements -->
 		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->		
 		<!-- Modernizr -->
-		<script src="js/modernizr-1.5.min.js"></script>
+		<script src="/js/modernizr-1.5.min.js"></script>
 
-		<link rel="stylesheet" href="ui-themes/aristo/jquery.ui.all.css"> 
-		<script src="js/jquery-ui-1.8.5.min.js"></script>
+		<link rel="stylesheet" href="/ui-themes/aristo/jquery.ui.all.css"> 
+		<script src="/js/jquery-ui-1.8.5.min.js"></script>
 
 		
 		<script type="text/javascript">
@@ -91,11 +91,13 @@
 				// 					$.post("/postcomment");
 				// 				});
 				
+				//ADD BUTTONS TO CONTRIBUTORS
+				$('#contributors ul li').append('<img class="solo" src="/img/solo.png" /><img class="mute" src="/img/mute.png" /></span>');
 		
 			});
 		</script>
 		
-		<link rel="stylesheet" type="text/css" href="css/my.css" />
+		<link rel="stylesheet" type="text/css" href="/css/my.css" />
 	</head>
 	<body>
 		<div id="container">
@@ -108,6 +110,7 @@
 											<input type="submit">
 										</form> -->
 				</div>
+				<div class="clear"></div>
 				<div id="thework">
 					<%= yield %>
 		
@@ -116,39 +119,33 @@
 			<div id="sidebar">
 				<div id="logo">
 				<h1>EXEgist</h1>
-			</div>
-			<div id="annotation">
-				<a href="#">
-					<p>Read Comments</p>
-					<p style="display:none">Add a Comment</p>
-					</a>
-			</div>
-			<div id="comment_depth">
-				<h3>Comment Depth</h3>
-				<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
-			</div>
-			<div id="comment length">
-				<h3>Comments: Short or Long</h3>
-				<label for="amount">Minimum:</label>
-				<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25">
-			</div>
-			<div id="contributors">
-				<h3>Contributors</h3>
-				<ul>
-					<li>cshirky</li>
-					<li>tomberenger</li>
-					<li>dreamsverse</li>
-					<li>baltarismyhomeboy</li>
-				</ul>
-			</div>
-		</div>
-		<div id="submit_comment">
-			<form action="/newcomment" method="post" id="newcomment">
-				<label>Comment:</label><br />
-				<input type="textarea" cols="5" rows="30" name="comment" id="comment">
-				<input type="submit">
-			</form>
-		</div>
-	</div>
+				</div>
+				<div id="annotation">
+					<a href="#">
+						<p>Read Comments</p>
+						<p style="display:none">Add a Comment</p>
+						</a>
+				</div>
+				<div id="comment_depth">
+					<h3>Comment Depth</h3>
+					<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
+				</div>
+				<div id="comment length">
+					<h3>Comments: Short or Long</h3>
+					<label for="amount">Minimum:</label>
+					<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25">
+				</div>
+				<div id="contributors">
+					<h3>Contributors</h3>
+					<ul>
+						<li>cshirky</li>
+						<li>tomberenger</li>
+						<li>dreamsverse</li>
+						<li>baltarismyhomeboy</li>
+					</ul>
+				</div>
+		</div> <!--END OF SIDEBAR-->
+		<div class="clear"></div>
+	</div><!--END OF CONTAINER-->
 </body>
 </html>
