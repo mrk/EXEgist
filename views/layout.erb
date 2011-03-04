@@ -41,55 +41,34 @@
 				
 				//ANNOTATION TOGGLE
 				var commentOn = false;
-				//$('#annotation a #amIOn').append('<span id="amIOn">OFF</span>');
 				
 				$('#annotation a').click(function(){
-					//console.log("here");
 					$('#annotation p').toggle();
 					commentOn = true;
 					//DO THE REST IN SINATRA
-					//var sentences = $('#thework p').text().split(".");
-					//$(sentences).wrap('<span class="aSentence" />');
-				});
-				
-				
-				
-				//SPLIT UP SENTENCES
-				// if(commentOn == true){
-				// 					var sentences = $('#thework p').text().split(".");
-				// 					//MAKE SENTENCES CLICKABLE IF ANNOTATION IS ON
-				// 					//SURROUND EACH SENTENCE WITH A SPAN TAG.
-				// 					$(sentences).wrap('<span class="aSentence" />');
-				// 				
-				// 				}
-				
+				});			
 				
 				//NEW COMMENT
-				$('#newcmt').click(function(){
+				// $('#newcmt').click(function(){
+				$('.sentence').click(function(){
 					if( !$('#thecomment').is(':visible') ) {
 						// it's not visible,
 						if (commentOn == true){
-							$('#newcmt').after('<span id="mynewcomment"></span>');
+							var sent_id = $(this).attr("id");
+							$(this).after('<span id="mynewcomment"></span>');
 							var new_cmt_seen = $('#mynewcomment').css('display');
 							if (new_cmt_seen == 'none') {
 								$('#mynewcomment').slideDown('fast').css("display","block");
 							} else {
 							}
 						//load the newCommment page
-							$('#mynewcomment').load('/newcomment', function(){
-							});
+							$('#mynewcomment').load('/newcomment/' + sent_id, function(){
+						});
 					}
 					} else {
 					    // it's visible so do nothing
 					}
 				});
-				
-				//SUBMIT COMMENT !! NOT WORKING EVEN REMOTELY
-				// $('#commentSubmit').click(function(){
-				// 					console.log("here");
-				// 					//$('#mynewcomment').slideUp('slow');
-				// 					$.post("/postcomment");
-				// 				});
 				
 				//ADD BUTTONS TO CONTRIBUTORS
 				$('#contributors ul li').append('<img class="solo" src="/img/solo.png" /><img class="mute" src="/img/mute.png" /></span>');
@@ -102,23 +81,14 @@
 	<body>
 		<div id="container">
 			<div id="login_work">
-				<div id="login">
-					<!-- <form action="/login" method="post" id="user_login">
-											<label>Login:</label><br />
-											<input type="email" cols="5" name="email" id="email">
-											<input type="password" cols="5" name="password" id="password">
-											<input type="submit">
-										</form> -->
-				</div>
-				<div class="clear"></div>
 				<div id="thework">
 					<%= yield %>
-		
 				</div>
 			</div>
 			<div id="sidebar">
+				
 				<div id="logo">
-				<h1>EXEgist</h1>
+					<h1>EXEgist</h1>
 				</div>
 				<div id="annotation">
 					<a href="#">
@@ -130,22 +100,24 @@
 					<h3>Comment Depth</h3>
 					<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
 				</div>
-				<div id="comment length">
+				<div class="clear"></div>
+				<div id="comment_length">
 					<h3>Comments: Short or Long</h3>
 					<label for="amount">Minimum:</label>
 					<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25">
 				</div>
+				<div class="clear"></div>
 				<div id="contributors">
-					<h3>Contributors</h3>
-					<ul>
-						<li>cshirky</li>
-						<li>tomberenger</li>
-						<li>dreamsverse</li>
-						<li>baltarismyhomeboy</li>
-					</ul>
-				</div>
-		</div> <!--END OF SIDEBAR-->
-		<div class="clear"></div>
-	</div><!--END OF CONTAINER-->
-</body>
+									<h3>Contributors</h3>
+									<ul>
+										<li>cshirky</li>
+										<li>tomberenger</li>
+										<li>dreamsverse</li>
+										<li>baltarismyhomeboy</li>
+									</ul>
+								</div>
+			</div> <!--END OF SIDEBAR-->
+			
+		</div><!--END OF CONTAINER-->
+	</body>
 </html>

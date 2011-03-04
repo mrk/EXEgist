@@ -52,10 +52,12 @@ end
 class TestComment
   include DataMapper::Resource
   
-  property :id,         Serial
-  property :username,   String
-  property :comment,    Text
-  property :created_at, DateTime
+  property :id,           Serial
+  property :username,     String
+  property :comment,      Text
+  property :sentence_id,  Integer
+  property :paper_id,     Integer
+  property :created_at,   DateTime
 
 end
 
@@ -111,6 +113,10 @@ end
 get '/papers/:id' do
   @paper = Paper.get(params[:id])
   @paperArray = @paper.body.split('.')
+  # @all_comments = TestComment.all(:paper_id => @paper)
+  # append <span class="comment">@all_comments.comment</span> where @all_comments.sentence_id == the "id" attribute of .sentence %>	
+  # in jQuery, just add the star when you see it the span.
+  
   erb :paper
 end
 
@@ -129,7 +135,7 @@ get '/fanfic' do
   erb :fanfic 
 end
 
-get '/newcomment' do
+get '/newcomment/:sentence_id' do
   erb :comment, :layout => false
 end
 

@@ -1,5 +1,10 @@
 <% @paperArray.each_with_index do |sentence, index| %>
-	<%= '<a href="#" class="sentence" id="#{index}">' + sentence + "</a>" %>
+	<%= '<a href="#" class="sentence" id="' + index.to_s + '">' + sentence + ".</a>" %>
+	<% if .sentence('class') == @all_comments.sentence_id %>
+		<%= '<span class="comment">' + @all_comments.comment + '</span>' %>
+	\ where @all_comments.sentence_id == the "id" attribute of .sentence %>	
+
+	
 <% end %>
 
 

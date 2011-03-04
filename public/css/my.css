@@ -68,7 +68,6 @@ a{
 }
 
 #sidebar{
-	float:left;
 	width:250px;
 	/*border-right: 1px solid #ddd;*/
 	border-radius: 10px;  
@@ -77,7 +76,6 @@ a{
  	background-color: #f6f2f5;
  	padding: 10px;
 	border: thin solid #c8c8c8;
-}  
 	
 }
 #logo, #comment_length, #contributors{
@@ -96,16 +94,14 @@ a{
 	text-shadow: 0 1px 0 #000;  
  }  
 
-#login{
-	display:none;
-}
-
 .wc{
 	color:blue;
 }
 form {
 	overflow: hidden;
 	clear: both;
+}
+
 label{
 	clear: left;
 	float: left;
@@ -139,10 +135,10 @@ button {
 	float: left;
 }
 
-#contributors ul li img{
+/*#contributors ul li img{
 	float:right;
 	height:20px;
-}
+}*/
 
 .clear{
 	clear:both;
@@ -151,5 +147,11 @@ button {
 }
 
 .sentence{
-	font-style:none;
+	text-decoration: none;
+	color: black;
+}
+
+.sentence:hover{
+	/*color: #7098ad;*/
+	background-color: #cde6fc;
 }
