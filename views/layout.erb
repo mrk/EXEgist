@@ -57,14 +57,18 @@
 							var sent_id = $(this).attr("id");
 							$(this).after('<span id="mynewcomment"></span>');
 							var new_cmt_seen = $('#mynewcomment').css('display');
+							//find .visible instead of .css(display)
 							if (new_cmt_seen == 'none') {
-								$('#mynewcomment').slideDown('fast').css("display","block");
+								$('#mynewcomment').slideDown('fast').css("display","block"); //show()
 							} else {
 							}
 						//load the newCommment page
-							$('#mynewcomment').load('/newcomment/' + sent_id, function(){
-						});
-					}
+							console.log("about to load new comment" + sent_id);
+							$('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);
+							// , function(){
+							// 								//FIX THIS CODE GYAHHHHHH!
+							// 						});
+						}
 					} else {
 					    // it's visible so do nothing
 					}
