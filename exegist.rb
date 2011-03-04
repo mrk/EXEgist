@@ -29,16 +29,6 @@ helpers do
     redirect '/login' unless logged_in?
   end
 
-  # # Get the logged in user's ID
-  # def get_userid
-  #   request.cookies['userid']
-  # end
-
-  # # Set the logged in user's ID (logging them in)
-  # def set_userid(id)
-  #   response.set_cookie('userid', id)
-  # end
-
 end
 
 # sets up DB
@@ -52,7 +42,6 @@ class User
   
   property :id,         Serial
   property :username,   String, :required => true, :unique => true
-  property :email,      String, :required => true, :unique => true, :format => :email_address
   
   has n, :comments
 end
@@ -104,7 +93,9 @@ get '/' do
 end
 
 get '/login' do
+  session["current_user"] = nil
   @title = "Log in to EXEgist"
+  @login = true
   erb :login
 end
 
@@ -131,13 +122,21 @@ get '/papers/:id' do
 end
 
 post '/login' do
-  @user = User.new(params[:user])
-  if @user.save
-    session["current_user"] = @user.username
-    redirect '/papers/' + session["current_paper"]
-  else
-    redirect '/'
-  end
+  @user = User.first_or_create(:username => params[:user])
+  session["current_user"] = @user.username
+  redirect '/papers/' + session["current_paper"]
+  # if @user
+  #     session["current_user"] = @user.username
+  #     redirect '/papers/' + session["current_paper"]
+  # else            
+  #     @user = User.new(params[:user])
+  #     if @user.save
+  #       session["current_user"] = @user.username
+  #       redirect '/papers/' + session["current_paper"]
+  #     else
+  #       redirect '/login'
+  #     end
+  # end
 end
 
 get '/wallace' do

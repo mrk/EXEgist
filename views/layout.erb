@@ -103,6 +103,15 @@
 		<div id="container">
 			<div id="login_work">
 				<div id="login">
+					<% if session["current_user"] %>
+						<a href="/login">Log Out</a>
+					<% else %>
+						<% unless @login %>
+							<a href="/login">Log In!</a>
+						<% end  %>
+					<% end %>
+					
+					
 					<!-- <form action="/login" method="post" id="user_login">
 											<label>Login:</label><br />
 											<input type="email" cols="5" name="email" id="email">
