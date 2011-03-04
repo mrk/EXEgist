@@ -4,33 +4,44 @@ require 'dm-core'
 require 'dm-migrations'
 require 'dm-timestamps'
 require 'dm-validations'
+require 'dm-types'
+#require 'rack-flash'
 
+# enable sessions (for login/cookies)
+enable :sessions
+#use Rack::Flash
 
-#NOTE ON COMMENTS
-#if we say that a comment is a child of another comment, that may solve our subcomments issue.
+# helpers can be called inside any of the main methods
+helpers do
 
+  # Check to see if a user is logged in
+  def logged_in?
+    #if request.cookies['userid']
+    if session["current_user"]
+      true
+    else
+      false
+    end
+  end
+
+  # Add this to the top of a route to make it accessible only to logged in users
+  def authorize!
+    redirect '/login' unless logged_in?
+  end
+
+end
+
+# sets up DB
 configure :development do
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/exegist.db")
 end
 
-# mark's first pass at defining our model
+
 class User
   include DataMapper::Resource
   
   property :id,         Serial
-  property :username,   String, :required => true, :unique => true, 
-    :messages => {
-      :presence => "Please specify a username.",
-      :is_unique => "That name is already being used.",
-      }
-  property :email,      String, :required => true, :unique => true, :format => :email_address,
-    :messages => {
-      :presence => "Please specify an email address.",
-      :is_unique => "That email address is already registered.",
-      :format => "Please provide a valid email address."
-      }
-  property :password,   String 
-  property :created_at, DateTime
+  property :username,   String, :required => true, :unique => true
   
   has n, :comments
 end
@@ -83,18 +94,11 @@ get '/' do
   erb :welcome
 end
 
-get '/register' do
-  @title = "EXEgist User Registration"
-  erb :register
-end
-
-post '/newuser' do
-  @user         = User.new(params[:user])
-  if @user.save
-    redirect("/")
-  else
-    redirect('/')
-  end
+get '/login' do
+  session["current_user"] = nil
+  @title = "Log in to EXEgist"
+  @login = true
+  erb :login
 end
 
 get '/papers/new' do
@@ -116,8 +120,27 @@ get '/papers/:id' do
   @all_comments = TestComment.all(:paper_id => @paper)
   # append <span class="comment">@all_comments.comment</span> where @all_comments.sentence_id == the "id" attribute of .sentence %>	
   # in jQuery, just add the star when you see it the span.
-  
+  session["current_paper"] = @paper.id.to_s
+  authorize!  
   erb :paper
+end
+
+post '/login' do
+  @user = User.first_or_create(:username => params[:user])
+  session["current_user"] = @user.username
+  redirect '/papers/' + session["current_paper"]
+  # if @user
+  #     session["current_user"] = @user.username
+  #     redirect '/papers/' + session["current_paper"]
+  # else            
+  #     @user = User.new(params[:user])
+  #     if @user.save
+  #       session["current_user"] = @user.username
+  #       redirect '/papers/' + session["current_paper"]
+  #     else
+  #       redirect '/login'
+  #     end
+  # end
 end
 
 get '/wallace' do
@@ -148,12 +171,8 @@ post '/receivedcomment' do
   #end
 end
 
-get '/receivedcomment' do
-  @comment = TestComment.new(:comment =>params[:thecomment], :sentence_id =>params[:sentence_id], :paper_id => params[:paper_id])
-  @comment.save
-  #  redirect("/fanfic")
-  #else
-  #end
+get '/*' do
+  redirect '/papers/' + session["current_paper"]
 end
 
 

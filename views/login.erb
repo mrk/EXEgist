@@ -1,0 +1,21 @@
+<h2><%= @title %></h2>
+
+<!-- <form action="/login" method="post" id="user">
+	<p>
+		<label>Username</label><br />
+		<input type="text" name="username" id="username" />
+	</p>
+	<p>
+		<label>Email</label><br />
+		<input type="email" name="email" id="width" />
+	</p>
+	<p>
+		<input type="submit">
+	</p>
+</form> -->
+
+<form action="/login" method="post" id="user">
+        <p><label for="username">Username</label><br /><input type="text"
+            name="user[username]" id="username"></p>
+        <p><input type="submit" value="LOG IN!!!"></p>
+</form>

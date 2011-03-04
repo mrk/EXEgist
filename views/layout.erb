@@ -91,6 +91,16 @@
 	<body>
 		<div id="container">
 			<div id="login_work">
+				<div id="login">
+					<% if session["current_user"] %>
+						<a href="/login">Log Out</a>
+					<% else %>
+						<% unless @login %>
+							<a href="/login">Log In!</a>
+						<% end  %>
+					<% end %>
+				</div>
+				<div class="clear"></div>
 				<div id="thework">
 					<%= yield %>
 				</div>

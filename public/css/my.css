@@ -94,6 +94,12 @@ a{
 	text-shadow: 0 1px 0 #000;  
  }  
 
+
+#login{
+	display:block;
+	float:right;
+}
+
 .wc{
 	color:blue;
 }
