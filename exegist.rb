@@ -167,6 +167,10 @@ post '/postcomment' do
   #end
 end
 
+get '/*' do
+  redirect '/papers/' + session["current_paper"]
+end
+
 
 
 
