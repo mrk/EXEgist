@@ -17,8 +17,9 @@
 		$('#mynewcomment').slideUp('slow');
 		$.post("/receivedcomment", $("#thecomment").serialize());
 
-	    return false;
+	    
 		$('/newcomment').unload( function () { alert("Bye now!"); } );
 //.reset();
+		return false;
 	});
 </script>

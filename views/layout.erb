@@ -65,14 +65,11 @@
 								$('#mynewcomment').slideDown('fast').css("display","block"); //show()
 							} else {
 							}
-						//load the newCommment page
 							console.log("about to load new comment" + sent_id);
+							//load the newCommment page with sentence id & paper_id
+							//not sure if it's necessary to load the sentence and 
+							//paper id anymore.
 							$('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);
-							//$('input #paper_id').attr('value', myPage );
-							
-							// , function(){
-							// 								//FIX THIS CODE GYAHHHHHH!
-							// 						});
 						}
 					} else {
 					    // it's visible so do nothing
@@ -81,8 +78,54 @@
 
 				
 				//ADD BUTTONS TO CONTRIBUTORS
-				$('#contributors ul li').append('<img class="solo" src="/img/solo.png" /><img class="mute" src="/img/mute.png" /></span>');
-		
+				$('#contributors ul li').append('<img class="mute" src="/img/mute.png" /><img class="solo" src="/img/solo.png" />');
+				
+				//SOLO BUTTON FUNCTIONALITY
+				//$('#contributors .solo').click(function(){
+					//if (var solo_user = $('#thework').attr("class")) == ($(this).parent('id')) { //.attr('id')
+						//solo_user.slideDown('fast').css("display","block");
+						//if solo_user is currently hidden
+						//$()
+						//then show it
+						//else
+						//do nothing
+						//if !solo_user is currently showing
+						//then hide it
+						//else
+						//do nothing
+					//}
+					//change dislay to show .slide down where 
+					//where ('#thework').attr("class") == the id of the #contributor ul li that contains this .solo...the parent id?
+				//});
+				
+				//MUTE BUTTON FUNCTIONALITY
+				//var contributors = $('#contributors ul li').text();
+				//var contributors = $('#contributors .mute').parent().text(); 
+				//alert(contributors);
+				$('#contributors .mute').click(function(){
+					var the_contributor = $(this).parent().text(); 
+					var contributed = $('#thework span').attr('class');
+					alert(the_contributor); 
+					alert(contributed);
+					if (contributed.indexOf(the_contributor) != -1) {
+						alert('gotcha');
+						contributed.slideDown('slow').css("display","block");//CONTRIBUTED IS THE CLASS NOT HTE SPAN SO IT WON'T WORK
+						alert('i made it!');
+						//var contribution_seen = $(this).css('display');
+						//if (contribution_seen == 'none') {
+						//	contribution_seen.slideDown('slow').css("display","block");
+						//	alert('finished');
+						//} else {
+							//$('.comment').slideUp('slow');
+							//$('.comment').css("display","none");
+					} else {
+						//$(this).css("display","none"); 
+					}
+					//var solo_li = $(this).parent('id');
+					//alert(solo_li);
+					//change dislay to none .slide down where 
+					//where ('#thework').attr("class") == the id of the #contributor ul li that contains this .solo...the parent id?
+				});
 			});
 		</script>
 		
@@ -130,7 +173,7 @@
 				<div id="contributors">
 									<h3>Contributors</h3>
 									<ul>
-										<li>cshirky</li>
+										<li id="cshirky">cshirky</li>
 										<li>tomberenger</li>
 										<li>dreamsverse</li>
 										<li>baltarismyhomeboy</li>
