@@ -5,18 +5,20 @@
 	<label>Comment</label><br />
 	<textarea rows="20" cols="20" name="comment" id="comment" value=""></textarea><br />
 	<input type="hidden" name="sentence_id" id="sentence_id" value="<%= params[:sentence_id] %>">
-		<input type="hidden" name="paper_id" id="paper_id" value="<%= @paper.id.to_s %>"
+	<input type="hidden" name="paper_id" id="paper_id" value="<%= @paperpage.to_s %>">
 	<input type="submit" id="commentSubmit" value="Thank you." />
 </form>
 
 <script type="text/javascript">
+//SUBMIT COMMENT
 	$('#commentSubmit').click(function(){
+		//$('input #paper_id').attr('value', myPage );
 		console.log("here");
 		$('#mynewcomment').slideUp('slow');
 		$.post("/receivedcomment", $("#thecomment").serialize());
-		
-        return false;
-		$('/newcomment').unload( function () { alert("Bye now!"); } );
 
+	    return false;
+		$('/newcomment').unload( function () { alert("Bye now!"); } );
+//.reset();
 	});
 </script>

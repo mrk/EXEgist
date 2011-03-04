@@ -1,14 +1,16 @@
 <% @paperArray.each_with_index do |sentence, index| %>
 	<%= '<a href="#" class="sentence" id="' + index.to_s + '">' + sentence + ".</a>" %>
-	<% for testcomment in @all_comments do %>
+	<% for commentsforpaper in @all_comments do %>
 	
-		<% if index == testcomment.sentence_id %>
-			<span class="comment"><%= testcomment.comment %></span>
+		<% if index == commentsforpaper.sentence_id %>
+			<span class="comment"><%= commentsforpaper.comment %></span>
 		<% end %>
 	
 	<% end %>
 	
 <% end %>
+
+
 
 
 <%#= @paper.body %>

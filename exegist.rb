@@ -135,7 +135,8 @@ get '/fanfic' do
   erb :fanfic 
 end
 
-get '/newcomment/:sentence_id&paper_id=:paper_id' do #&paper_id=:paper_id
+get '/newcomment/:sentence_id&paper_id=:paper_id' do
+  @paperpage = params[:paper_id]
   erb :comment, :layout => false
 end
 
@@ -147,6 +148,13 @@ post '/receivedcomment' do
   #end
 end
 
+get '/receivedcomment' do
+  @comment = TestComment.new(:comment =>params[:thecomment], :sentence_id =>params[:sentence_id], :paper_id => params[:paper_id])
+  @comment.save
+  #  redirect("/fanfic")
+  #else
+  #end
+end
 
 
 

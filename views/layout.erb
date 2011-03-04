@@ -39,6 +39,9 @@
 				//$('#thework p').append("<p class="wc">There are " + wordcount + "words in the comment.</p>");
 				//WOOHOO!! So, no need to show it, but will be useful for Minimum length.
 				
+				//PAGE_ID JQUERY VARIABLE
+				var myPage = <%= @paper.id.to_s %>;
+				
 				//ANNOTATION TOGGLE
 				var commentOn = false;
 				
@@ -65,6 +68,8 @@
 						//load the newCommment page
 							console.log("about to load new comment" + sent_id);
 							$('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);
+							//$('input #paper_id').attr('value', myPage );
+							
 							// , function(){
 							// 								//FIX THIS CODE GYAHHHHHH!
 							// 						});
@@ -73,6 +78,7 @@
 					    // it's visible so do nothing
 					}
 				});
+
 				
 				//ADD BUTTONS TO CONTRIBUTORS
 				$('#contributors ul li').append('<img class="solo" src="/img/solo.png" /><img class="mute" src="/img/mute.png" /></span>');
