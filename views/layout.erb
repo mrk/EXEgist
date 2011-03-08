@@ -160,9 +160,9 @@
 				$('#contributors .solo').click(function(){
 					var the_contributor = $(this).parent().text();
 					console.log(the_contributor); 
-					var cont_span = $('#thework span');
+					var cont_span = $('#thework span').attr('class');
+					console.log(cont_span);
 					var contributed = cont_span.attr('class');
-					console.log(contributed);
 					//var myArray = $(contributed.indexOf(the_contributor) != -1);
 					//alert(myArray);
 					//if (myArray == true){

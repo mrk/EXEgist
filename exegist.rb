@@ -5,6 +5,8 @@ require 'dm-migrations'
 require 'dm-timestamps'
 require 'dm-validations'
 require 'dm-types'
+#require 'dm-mysql-adapter'
+#require 'mysql'
 #require 'rack-flash'
 
 # enable sessions (for login/cookies)
@@ -35,7 +37,8 @@ end
 configure :development do
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/exegist.db")
   # A MySQL connection:
-  #DataMapper.setup(:default, 'mysql://localhost/the_database_name')
+  #DataMapper.setup(:default, "mysql://#{Dir.pwd}/exegist")
+  #SQL ISSUE, NEED HELP
 end
 
 
@@ -182,7 +185,8 @@ end
 #TEST FOR ADDING COMMENTS
 get '/showcomtest' do
   @mycomments = TestComment.all(:order => [:created_at.desc])
-  erb :showcomtest, :layout => false
+  
+  erb :showcomtest
 end
 
 
