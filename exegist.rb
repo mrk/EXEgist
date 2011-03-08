@@ -64,12 +64,14 @@ class TestComment
   include DataMapper::Resource
   
   property :id,           Serial
-  property :username,     String
+  # property :username,     String
   property :comment,      Text
   property :sentence_id,  Integer
   property :paper_id,     Integer
   property :created_at,   DateTime
-
+  
+  # belongs_to :user 
+  
 end
 
 class Paper
@@ -171,11 +173,15 @@ post '/receivedcomment' do
   #end
 end
 
-get '/*' do
-  redirect '/papers/' + session["current_paper"]
+# get '/*' do
+#   redirect '/papers/' + session["current_paper"]
+# end
+
+#TEST FOR ADDING COMMENTS
+get '/showcomtest' do
+  @mycomments = TestComment.all(:order => [:created_at.desc])
+  erb :showcomtest, :layout => false
 end
-
-
 
 
 

@@ -15,7 +15,9 @@
 		//$('input #paper_id').attr('value', myPage );
 		console.log("here");
 		$('#mynewcomment').slideUp('slow');
-		$.post("/receivedcomment", $("#thecomment").serialize());
+		$.post('/receivedcomment', $('#thecomment').serialize()), function(data){
+			$('#thework').//(id == sentence_id).append(<span class ="comment username">comment</span>)
+		};
 
 	    
 		$('/newcomment').unload( function () { alert("Bye now!"); } );

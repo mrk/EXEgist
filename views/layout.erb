@@ -17,6 +17,7 @@
 				
 				//IF SPAN EXISTS, SHOW ASTERISK
 				$('.comment').before('<a href="#" class="marker">*</a>');
+				//COMMENT 
 				
 				//COMMENTS APPEAR AND DISAPPEAR WITH CLICK OF ASTERISK
 				$('.marker').click(function(){
@@ -38,9 +39,40 @@
 				//show the # of words in a comment at the end?
 				//$('#thework p').append("<p class="wc">There are " + wordcount + "words in the comment.</p>");
 				//WOOHOO!! So, no need to show it, but will be useful for Minimum length.
+				//HIDE SHORT COMMENTS
+				//currently set at 25 words or less.
+				$('#short_comments').delegate("input:checkbox", "click", function(){		
+					//jQuery.each('.comment', function() {
+					  
+					
+					
+						if (this.checked == true) {
+							var comments_seen = $('.comment').css('display');
+						
+							if (comments_seen == 'none') {
+								console.log('comment cannot be seen');
+							} else {
+								console.log('i can be seen');
+								if (wordcount > 25) {
+									console.log('im greater than 25 words and visible');
+								
+								} else {
+									console.log('im more than 25 and visible');
+									$('.comment').slideUp('slow');
+								}
+								//console.log('i am not hit');
+								//$('.comment').toggle('slow');
+							}
+					 		//console.log('Ive been hit');
+					 	} else {
+				 	
+					 	}
+					//});
+				});
 				
 				//PAGE_ID JQUERY VARIABLE
 				var myPage = <%= @paper.id.to_s %>;
+				//DEPRECATION ISSUE - DEBUG LATER
 				
 				//ANNOTATION TOGGLE
 				var commentOn = false;
@@ -69,7 +101,7 @@
 							//load the newCommment page with sentence id & paper_id
 							//not sure if it's necessary to load the sentence and 
 							//paper id anymore.
-							$('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);
+							$('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);   
 						}
 					} else {
 					    // it's visible so do nothing
@@ -81,36 +113,28 @@
 				$('#contributors ul li').append('<img class="mute" src="/img/mute.png" /><img class="solo" src="/img/solo.png" />');
 				
 				//SOLO BUTTON FUNCTIONALITY
-				//$('#contributors .solo').click(function(){
-					//if (var solo_user = $('#thework').attr("class")) == ($(this).parent('id')) { //.attr('id')
-						//solo_user.slideDown('fast').css("display","block");
-						//if solo_user is currently hidden
-						//$()
-						//then show it
-						//else
-						//do nothing
-						//if !solo_user is currently showing
-						//then hide it
-						//else
-						//do nothing
-					//}
-					//change dislay to show .slide down where 
-					//where ('#thework').attr("class") == the id of the #contributor ul li that contains this .solo...the parent id?
-				//});
+				//see mute button
 				
 				//MUTE BUTTON FUNCTIONALITY
 				//var contributors = $('#contributors ul li').text();
 				//var contributors = $('#contributors .mute').parent().text(); 
 				//alert(contributors);
-				$('#contributors .mute').click(function(){
+				$('#contributors .solo').click(function(){
 					var the_contributor = $(this).parent().text(); 
-					var contributed = $('#thework span').attr('class');
+					var cont_span = $('#thework span');
+					var contributed = cont_span.attr('class');
 					alert(the_contributor); 
 					alert(contributed);
+					//var myArray = $(contributed.indexOf(the_contributor) != -1);
+					//alert(myArray);
+					//if (myArray == true){
+					//	$(this).slideDown('slow').css("display","block");
 					if (contributed.indexOf(the_contributor) != -1) {
-						alert('gotcha');
-						contributed.slideDown('slow').css("display","block");//CONTRIBUTED IS THE CLASS NOT HTE SPAN SO IT WON'T WORK
-						alert('i made it!');
+						//alert('gotcha');
+						//for each of these 
+						$(this).slideDown('slow').css("display","block");
+						//CONTRIBUTED IS THE CLASS NOT HTE SPAN SO IT WON'T WORK
+						//alert('i made it!');
 						//var contribution_seen = $(this).css('display');
 						//if (contribution_seen == 'none') {
 						//	contribution_seen.slideDown('slow').css("display","block");
@@ -161,13 +185,18 @@
 				</div>
 				<div id="comment_depth">
 					<h3>Comment Depth</h3>
-					<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
+					<form>
+						<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
+					</form>
 				</div>
 				<div class="clear"></div>
 				<div id="comment_length">
-					<h3>Comments: Short or Long</h3>
-					<label for="amount">Minimum:</label>
-					<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25">
+					<h3>Comments Length</h3>
+					<form id="short_comments">
+						<input type="checkbox" name="shrt_comments" value="shrt_comments" />25 Word Minimum<br />
+					</form>
+					<!-- <label for="amount">Minimum:</label>
+										<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25"> -->
 				</div>
 				<div class="clear"></div>
 				<div id="contributors">

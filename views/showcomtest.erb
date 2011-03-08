@@ -1,0 +1,6 @@
+<h1>My Comment Test</h1>
+<% @mycomments.each_with_index do ||%>
+<h4><%= TestComment.paper_id %></h4>
+<p><%= TestComment.comment %>.<br />
+CREATED AT<%= TestComment.created_at %></p>
+<% end %>
