@@ -1,0 +1,45 @@
+<h1>EXEgist</h1>
+Version: So Alpha It Hurts.
+
+ITP Midterm project for Designing Conversation Spaces at ITP, 2011.
+
+Build is in Ruby, Sinatra, DataMapper, SQLite3
+
+EXEgist is an experimental conversation spaces that provides the user with the ability to inline comment on any sentence in the article.  
+
+ADD COMMENT - Click on any sentence and you can read all the comments within it.
+If you have the add comment and click on the sentence, you'll be able to add a comment to it.  
+
+There are additional features on the sidebar
+
+COMMENT LENGTH - In the hopes of encouraging longer comments, we have an optional button that is auto-set to hide comments that are under 25 words.
+
+COMMENT DEPTH - The ability to see just see no comments, the first layer, or all the layers.  Ultimately the goal is to have the comment depth be controlled entirely by the user. 
+
+CONTRIBUTORS - The ability to single out the contributions from a specific contributor to either see just their comments or mute their comments.
+
+________
+
+##Current Issues
+
+- OVERALL: It, you know, doesn't work n stuff.
+
+- PAPER/ARTICLE SUBMISSION: We are currently able to post papers/articles.  But it's stripping the formatting.
+
+- COMMENT POSTS: I have no idea if the comments are actually going into the db.  I need some basic help with seeing what's in my db.  I am trying to pull up all the comments in showcomtest.erb and it's coming up as #, which either means there's nothing in there or I'm calling it wrong.
+
+- CONTRIBUTORS: (Solo / Mute)The goal is when you click on the contributor solo button, it shows only the contributions from that user.  This is currently opening every comment, not just the comments from the selected user.  Example is on wallace.erb.  The mute button is the opposite effect, to hide the user, but it hasn't been touched yet.  Ultimately, it would save your preferences as well. (Highlight) When the user scrolls over a comment from a user, their username lights up.
+
+_______
+
+==Minor Issues
+
+- COMMENT LENGTH: when you click on Comment Length, it will close anyhting under 25 comments.  However, when you click it again, it will open all the comments under 25.  This should simply reopen all the comments that were previously closed.  That's tricky and not necessary for the  demo.
+
+_______
+
+##Next Steps
+
+- Fix Current Issues
+
+
