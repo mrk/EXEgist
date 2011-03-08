@@ -1,4 +1,4 @@
-<h1>EXEgist</h1>
+==EXEgist
 Version: So Alpha It Hurts.
 
 ITP Midterm project for Designing Conversation Spaces at ITP, 2011.
@@ -20,7 +20,7 @@ CONTRIBUTORS - The ability to single out the contributions from a specific contr
 
 ________
 
-##Current Issues
+==Current Issues
 
 - OVERALL: It, you know, doesn't work n stuff.
 
