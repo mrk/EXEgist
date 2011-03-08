@@ -33,41 +33,82 @@
 				
 				//COMMENT WORD COUNT
 				//split up the words
-				var words = $('.comment').text().split(" ");
+				//var words = $(this).text().split(" ");
 				//count the words in a comment.
-				var wordcount = words.length;
+				//var wordcount = words.length;
 				//show the # of words in a comment at the end?
 				//$('#thework p').append("<p class="wc">There are " + wordcount + "words in the comment.</p>");
 				//WOOHOO!! So, no need to show it, but will be useful for Minimum length.
 				//HIDE SHORT COMMENTS
 				//currently set at 25 words or less.
-				$('#short_comments').delegate("input:checkbox", "click", function(){		
-					//jQuery.each('.comment', function() {
-					  
-					
-					
-						if (this.checked == true) {
-							var comments_seen = $('.comment').css('display');
+				function hideMyComments() {
+					console.log('hide my comments');
+					console.log(this);
+					var e = $("#"+this[0]);
+					var words = e.text().split(" ");
+					var wordcount = words.length;
+					console.log(e);
+					var comments_seen = e.css('display');
+					if (comments_seen == 'none') {
+						console.log('comment cannot be seen');
+							
+					} else {
+						console.log('i can be seen');
 						
-							if (comments_seen == 'none') {
-								console.log('comment cannot be seen');
+						 if ( wordcount < 25 ) {
+							console.log('less than 25 visible');
+						 	e.slideUp('slow');						 				 	
+						} else { 
+							console.log('more than 25');
+						}
+					}
+				}
+				
+				function showMyComments() {
+					console.log('show my comments');
+					console.log(this);
+					var e = $("#"+this[0]);
+					var words = e.text().split(" ");
+					var wordcount = words.length;
+					console.log(e);
+					var comments_seen = e.css('display');
+					if (comments_seen == 'none') {
+						console.log('comment cannot be seen');
+						if ( wordcount < 25 ) {
+							console.log('less than 25 visible');
+						 	e.slideDown('slow').css("display","block");					 				 	
+						} else { 
+							console.log('more than 25');
+						}	
+					} else {
+						console.log('i can be seen');
+						
+						
+					}
+				}
+				
+				$('#short_comments').delegate("input:checkbox", "click", function(){		
+					var arr = [];
+					//create the array
+					$('#thework')
+					.find('span')
+					.each(function(){ arr.push(this.id); });
+					
+					console.log('checkbox has been clicked');
+						if (this.checked == true) {
+							
+							
+							//console.log(arr);
+							jQuery.each(arr, hideMyComments
+							)
+							
+							
 							} else {
-								console.log('i can be seen');
-								if (wordcount > 25) {
-									console.log('im greater than 25 words and visible');
-								
-								} else {
-									console.log('im more than 25 and visible');
-									$('.comment').slideUp('slow');
-								}
-								//console.log('i am not hit');
-								//$('.comment').toggle('slow');
+								jQuery.each(arr, showMyComments
+								)	
 							}
-					 		//console.log('Ive been hit');
-					 	} else {
-				 	
-					 	}
-					//});
+							
+					
 				});
 				
 				//PAGE_ID JQUERY VARIABLE
