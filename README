@@ -1,4 +1,4 @@
-#EXEgist#
+#EXEgist
 Version: So Alpha It Hurts.
 
 ITP Midterm project for Designing Conversation Spaces at ITP, 2011.
@@ -20,7 +20,7 @@ CONTRIBUTORS - The ability to single out the contributions from a specific contr
 
 ________
 
-##Current Issues##
+##Current Issues
 
 - OVERALL: It, you know, doesn't work n stuff.
 
@@ -32,12 +32,14 @@ ________
 
 _______
 
-##Minor Issues##
+##Minor Issues
 
 - COMMENT LENGTH: when you click on Comment Length, it will close anyhting under 25 comments.  However, when you click it again, it will open all the comments under 25.  This should simply reopen all the comments that were previously closed.  That's tricky and not necessary for the  demo.
 
 _______
 
-##Next Steps##
+##Next Steps
 
 - Fix Current Issues
+
+
