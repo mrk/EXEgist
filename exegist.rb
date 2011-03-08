@@ -34,6 +34,8 @@ end
 # sets up DB
 configure :development do
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/exegist.db")
+  # A MySQL connection:
+  #DataMapper.setup(:default, 'mysql://localhost/the_database_name')
 end
 
 
