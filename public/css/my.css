@@ -1,3 +1,5 @@
+/* @override http://localhost:9393/css/my.css */
+
 html,body{
 	margin:0;
 	padding:0;
@@ -78,9 +80,10 @@ a{
 	border: thin solid #c8c8c8;
 	
 }
-#logo, #comment_length, #contributors{
+#logo, #comment_depth, #comment_length, #contributors{
 	min-height:50px;
 	border-style:1px solid black;
+	float: left;
 }
 
 #contributors ul li{
@@ -145,7 +148,6 @@ button {
 	float:right;
 	height:20px;
 }*/
-
 .clear{
 	clear:both;
 	height:0;

@@ -5,7 +5,6 @@
 		<script type="text/javascript" src="/js/jquery-1.5.min.js"></script>		
 		<!-- HTML5 Shim, IE8 and bellow recognize HTML5 elements -->
 		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->		
-		<!-- Modernizr -->
 		<script src="/js/modernizr-1.5.min.js"></script>
 
 		<link rel="stylesheet" href="/ui-themes/aristo/jquery.ui.all.css"> 
@@ -20,25 +19,25 @@
 				//COMMENT 
 				
 				//COMMENTS APPEAR AND DISAPPEAR WITH CLICK OF ASTERISK
-				$('.marker').click(function(){
+				$('.marker, .sentence').click(function(){
+				//$('.sentence').click(function(){	
 					//if the display is none
-					var comments_seen = $('.comment').css('display');
+					//FUCK YES
+					//ALL COMMENTS UNTIL THE NEXT SENTENCE.
+					var f = $(this).nextUntil('.sentence','.comment');
+					console.log(f);
+					//IF READ COMMENTS IS ON   !! NOT DONE
+					//SELECT ALL SPANS THAT ARE BEFORE THE NEXT .sentence  !! NOT DONE
+					var comments_seen = $(f).css('display');
 					if (comments_seen == 'none') {
-						$('.comment').slideDown('slow').css("display","block");
+						$(f).slideDown('slow').css("display","block");
 					} else {
-						$('.comment').slideUp('slow');
+						$(f).slideUp('slow');
 						//$('.comment').css("display","none");
 					}
 				});
 				
-				//COMMENT WORD COUNT
-				//split up the words
-				//var words = $(this).text().split(" ");
-				//count the words in a comment.
-				//var wordcount = words.length;
-				//show the # of words in a comment at the end?
-				//$('#thework p').append("<p class="wc">There are " + wordcount + "words in the comment.</p>");
-				//WOOHOO!! So, no need to show it, but will be useful for Minimum length.
+
 				//HIDE SHORT COMMENTS
 				//currently set at 25 words or less.
 				function hideMyComments() {
@@ -63,7 +62,7 @@
 						}
 					}
 				}
-				
+				//SHOW SHORT COMMENTS
 				function showMyComments() {
 					console.log('show my comments');
 					console.log(this);
@@ -86,7 +85,7 @@
 						
 					}
 				}
-				
+				//ON COMMENT_LENGTH CLICK, 
 				$('#short_comments').delegate("input:checkbox", "click", function(){		
 					var arr = [];
 					//create the array
@@ -95,14 +94,10 @@
 					.each(function(){ arr.push(this.id); });
 					
 					console.log('checkbox has been clicked');
-						if (this.checked == true) {
-							
-							
-							//console.log(arr);
+						if (this.checked == true) {	
+							//RUN HIDE COMMENTS
 							jQuery.each(arr, hideMyComments
 							)
-							
-							
 							} else {
 								jQuery.each(arr, showMyComments
 								)	
@@ -156,16 +151,18 @@
 				//SOLO BUTTON FUNCTIONALITY
 				//see mute button
 				
+
+				
 				//MUTE BUTTON FUNCTIONALITY
 				//var contributors = $('#contributors ul li').text();
 				//var contributors = $('#contributors .mute').parent().text(); 
 				//alert(contributors);
 				$('#contributors .solo').click(function(){
-					var the_contributor = $(this).parent().text(); 
+					var the_contributor = $(this).parent().text();
+					console.log(the_contributor); 
 					var cont_span = $('#thework span');
 					var contributed = cont_span.attr('class');
-					alert(the_contributor); 
-					alert(contributed);
+					console.log(contributed);
 					//var myArray = $(contributed.indexOf(the_contributor) != -1);
 					//alert(myArray);
 					//if (myArray == true){
@@ -230,7 +227,6 @@
 						<input type="number" name="numeric-spinner" id="numeric-spinner" value="2" min="0">
 					</form>
 				</div>
-				<div class="clear"></div>
 				<div id="comment_length">
 					<h3>Comments Length</h3>
 					<form id="short_comments">
@@ -239,18 +235,18 @@
 					<!-- <label for="amount">Minimum:</label>
 										<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25"> -->
 				</div>
-				<div class="clear"></div>
 				<div id="contributors">
-									<h3>Contributors</h3>
-									<ul>
-										<li id="cshirky">cshirky</li>
-										<li>tomberenger</li>
-										<li>dreamsverse</li>
-										<li>baltarismyhomeboy</li>
-									</ul>
-								</div>
+					<h3>Contributors</h3>
+					<ul>
+						<li id="cshirky">cshirky</li>
+						<li>tomberenger</li>
+						<li>dreamsverse</li>
+						<li>baltarismyhomeboy</li>
+					</ul>
+				</div>
+					<div class="clear"></div>
 			</div> <!--END OF SIDEBAR-->
-			
+			<div class="clear"></div>
 		</div><!--END OF CONTAINER-->
 	</body>
 </html>
