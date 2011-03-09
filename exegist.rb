@@ -62,11 +62,13 @@ class Comment                            # classes map to tables
   property :created_at,   DateTime
   #property :child_of, 
   
-  belongs_to :user 
+  belongs_to :user
 end
 
 class TestComment
   include DataMapper::Resource
+  
+  belongs_to :paper
   
   property :id,           Serial
   # property :username,     String
@@ -74,8 +76,6 @@ class TestComment
   property :sentence_id,  Integer
   property :paper_id,     Integer
   property :created_at,   DateTime
-  
-  # belongs_to :user 
   
 end
 
@@ -124,7 +124,7 @@ end
 get '/papers/:id' do
   @paper = Paper.get(params[:id])
   @paperArray = @paper.body.split('.')
-  @all_comments = TestComment.all(:paper_id => @paper) 
+  @all_comments = TestComment.all(:paper_id => @paper.id) 
   # append <span class="comment">@all_comments.comment</span> where @all_comments.sentence_id == the "id" attribute of .sentence %>	
   # in jQuery, just add the star when you see it the span.
   session["current_paper"] = @paper.id.to_s
