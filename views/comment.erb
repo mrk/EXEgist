@@ -10,18 +10,40 @@
 </form>
 
 <script type="text/javascript">
-//SUBMIT COMMENT
-	$('#commentSubmit').click(function(){
-		//$('input #paper_id').attr('value', myPage );
-		console.log("here");
-		$('#mynewcomment').slideUp('slow');
-		$.post('/receivedcomment', $('#thecomment').serialize()), function(data){
-			$('#thework').//(id == sentence_id).append(<span class ="comment username">comment</span>)
-		};
+	// attach a submit handler to the form
+	 	$(function() {
+		$('#commentSubmit').click(function() {
+			//$('#container').append('<img src="img/loading.gif" alt="Currently Loading" id="loading" />');
+			
+			
 
-	    
-		$('/newcomment').unload( function () { alert("Bye now!"); } );
-//.reset();
-		return false;
-	});
+			var username = $('#username').val();
+			var comment = $('#comment').val();
+			var sentence_id = $('#sentence_id').val();
+			var paper_id = $('#paper_id').val();
+
+			$.ajax({
+				url: '/receivedcomment',
+				type: 'POST',
+				data: 'username=' + username + '&comment=' + comment + '&sentence_id=' + sentence_id + '&paper_id=' + paper_id,
+
+				success: function(result) {
+					$('#mynewcomment').slideUp('fast');
+					$('#' + sentence_id).after('<span class="comment ' + sentence_id + '">' + comment + '</span>');
+					console.log('just added comment');
+					$('#' + sentence_id).after('<a href="#" class="marker">*</a>');
+					
+					$('#loading').fadeOut(500, function() {
+					console.log('about to remove');
+					$('#mynewcomment').remove();
+					
+					});
+				}
+			});
+
+			return false;
+		});
+		//console.log('all finished with the submission!');
+	  });
+	
 </script>

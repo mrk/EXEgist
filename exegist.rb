@@ -124,7 +124,7 @@ end
 get '/papers/:id' do
   @paper = Paper.get(params[:id])
   @paperArray = @paper.body.split('.')
-  @all_comments = TestComment.all(:paper_id => @paper)
+  @all_comments = TestComment.all(:paper_id => @paper) 
   # append <span class="comment">@all_comments.comment</span> where @all_comments.sentence_id == the "id" attribute of .sentence %>	
   # in jQuery, just add the star when you see it the span.
   session["current_paper"] = @paper.id.to_s
@@ -171,7 +171,7 @@ get '/newcomment/:sentence_id&paper_id=:paper_id' do
 end
 
 post '/receivedcomment' do
-  @comment = TestComment.new(:comment =>params[:thecomment], :sentence_id =>params[:sentence_id], :paper_id => params[:paper_id])
+  @comment = TestComment.new(:comment =>params[:comment], :sentence_id =>params[:sentence_id], :paper_id => params[:paper_id])
   @comment.save
   #  redirect("/fanfic")
   #else
@@ -186,7 +186,7 @@ end
 get '/showcomtest' do
   @mycomments = TestComment.all(:order => [:created_at.desc])
   
-  erb :showcomtest
+  erb :showcomtest, :layout => false
 end
 
 

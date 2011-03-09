@@ -15,7 +15,10 @@
 			$ (function(){
 				
 				//IF SPAN EXISTS, SHOW ASTERISK
+				function showAst(){
 				$('.comment').before('<a href="#" class="marker">*</a>');
+				}
+				showAst();
 				//COMMENT 
 				
 				//COMMENTS APPEAR AND DISAPPEAR WITH CLICK OF ASTERISK
@@ -115,9 +118,17 @@
 				
 				$('#annotation a').click(function(){
 					$('#annotation p').toggle();
+					if (commentOn == true) {
+						commentOn = false;
+					} else {
 					commentOn = true;
+					}
+					console.log('switch!');
+				
+				console.log('Your ability to comment is ' + commentOn);
 					//DO THE REST IN SINATRA
-				});			
+				});	
+						
 				
 				//NEW COMMENT
 				// $('#newcmt').click(function(){
@@ -188,6 +199,9 @@
 					//change dislay to none .slide down where 
 					//where ('#thework').attr("class") == the id of the #contributor ul li that contains this .solo...the parent id?
 				});
+				
+				//SUBMIT COMMENT
+				
 			});
 		</script>
 		
@@ -218,7 +232,7 @@
 				<div id="annotation">
 					<a href="#">
 						<p>Read Comments</p>
-						<p style="display:none">Add a Comment</p>
+						<p id="alt" style="display:none">Add a Comment</p>
 						</a>
 				</div>
 				<div id="comment_depth">
