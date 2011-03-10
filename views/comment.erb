@@ -1,7 +1,7 @@
 <h2>New Comment Yay!</h2>
 <form action="" name="thecomment" id="thecomment">
 	<label>Username</label><br />
-	<input type="text" name="username" id="username"><br />
+	<input type="hidden" name="username" id="username" value="<%= session["current_user"] %>"><br />
 	<label>Comment</label><br />
 	<textarea rows="20" cols="20" name="comment" id="comment" value=""></textarea><br />
 	<input type="hidden" name="sentence_id" id="sentence_id" value="<%= params[:sentence_id] %>">
@@ -28,6 +28,7 @@
 				data: 'username=' + username + '&comment=' + comment + '&sentence_id=' + sentence_id + '&paper_id=' + paper_id,
 
 				success: function(result) {
+					console.log(username);
 					$('#mynewcomment').slideUp('fast');
 					$('#' + sentence_id).after('<span class="comment ' + sentence_id + '">' + comment + '</span>');
 					console.log('just added comment');

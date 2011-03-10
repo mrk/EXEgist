@@ -17,12 +17,12 @@ html,body{
 	    left top,
 		color-stop(0, rgb(227,227,227)),
 	    color-stop(0.29, rgb(227,227,227)),
-	    color-stop(0.9, rgb(255,255,255))
+	    color-stop(0.9, rgb(235,235,235))
 	);
 	background-image: -moz-linear-gradient(
 	    center bottom,
 		rgb(227,227,227) 29%,
-	    rgb(255,255,255) 90%
+	    rgb(235,235,235) 90%
 	);
 	-webkit-box-shadow: 0px 0px 15px #000000;
 	-moz-box-shadow: 0px 0px 15px #000000;

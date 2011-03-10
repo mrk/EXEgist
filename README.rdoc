@@ -38,8 +38,6 @@ INSERTING NTH ORDER COMMENTS
 
 - COMMENT DEPTH: Create ability to Switch between Show No Comments, Show First Order Comments, and Show All Comments
 
-- TOO MANY STARS: For every comment, there is a star, when there only needs to be one per sentence.
-
 - MIN WORD LENGTH: This is working on /wallace, but not on /papers/6.  It should hide all comments that are shorter than 25 words.  Then, once that works, set it to default to On.
 
 - PAPER/ARTICLE SUBMISSION: We are currently able to post papers/articles.  But it's stripping any formatting from the article that was posted.
@@ -56,14 +54,6 @@ INSERTING NTH ORDER COMMENTS
 
 ==Next Steps
 
-- Fix Current Issues
-
 - COMMENT ON COMMENTS
 
 - CHANGE READ/POST STRUCTURE: This would remove the button on the left that switches from read comments to add post.  Instead, when you clicked on a sentence, it would open up the comments below it.  On the right side of the sentence, there would be a button that would open up a Post Comment form.
-
-Given what we are trying to accomplish here, what would have been the best way to approach this concept?
-
-What are some common patterns that you would use given our intended framework?
-
-Do you know of any educational resources that we could have used in general for using Sinatra or perhaps Rails?
