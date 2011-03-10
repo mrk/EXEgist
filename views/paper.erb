@@ -7,6 +7,14 @@
 		<span class="comment <%= comment.sentence_id %>" id="<%= comment.id %>" style="display:none;"><%= comment.comment %></span>
 		<% end %>
 	<% end %>
+	<% for comment in @all_comments %>
+			<% if comment.sentence_id == index %>
+				<a href="#" class="marker">*</a>
+				<% break %>
+			<% end %>
+		<% end %>
+	
+		
 	
 <% end %>
 
