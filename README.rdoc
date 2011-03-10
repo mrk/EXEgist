@@ -36,6 +36,12 @@ ________
 
 ==jQuery Issues
 
+- COMMENT DEPTH: Create ability to Switch between Show No Comments, Show First Order Comments, and Show All Comments
+
+- TOO MANY STARS: For every comment, there is a star, when there only needs to be one per sentence.
+
+- MIN WORD LENGTH: This is working on /wallace, but not on /papers/6.  It should hide all comments that are shorter than 25 words.  Then, once that works, set it to default to On.
+
 - PAPER/ARTICLE SUBMISSION: We are currently able to post papers/articles.  But it's stripping any formatting from the article that was posted.
 
 - COMMENT POSTS: Needs to be rewritten with the new db structure. 
