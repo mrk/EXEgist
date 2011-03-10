@@ -1,11 +1,12 @@
-<h2>New Comment Yay!</h2>
+<h2>New Comment (!)</h2>
 <form action="" name="thecomment" id="thecomment">
 	<label>Username</label><br />
 	<input type="text" name="username" id="username"><br />
 	<label>Comment</label><br />
 	<textarea rows="20" cols="20" name="comment" id="comment" value=""></textarea><br />
 	<input type="hidden" name="sentence_id" id="sentence_id" value="<%= params[:sentence_id] %>">
-	<input type="hidden" name="paper_id" id="paper_id" value="<%= @paperpage.to_s %>">
+	<input type="hidden" name="parent_id" id="parent_id" value="<%= @myparent.to_s %>">
+	<input type="hidden" name="parent_type" id="parent_type" value="<%= @myparenttype.to_s %>">
 	<input type="submit" id="commentSubmit" value="Thank you." />
 </form>
 
@@ -20,12 +21,13 @@
 			var username = $('#username').val();
 			var comment = $('#comment').val();
 			var sentence_id = $('#sentence_id').val();
-			var paper_id = $('#paper_id').val();
+			var parent_id = $('#parent_id').val();
+			var parent_type = $('#parent_type').val();
 
 			$.ajax({
 				url: '/receivedcomment',
 				type: 'POST',
-				data: 'username=' + username + '&comment=' + comment + '&sentence_id=' + sentence_id + '&paper_id=' + paper_id,
+				data: 'username=' + username + '&comment=' + comment + '&sentence_id=' + sentence_id + '&parent_id=' + parent_id + '&parent_type=' + parent_type ,
 
 				success: function(result) {
 					$('#mynewcomment').slideUp('fast');

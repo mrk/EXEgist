@@ -159,7 +159,9 @@
 							//load the newCommment page with sentence id & paper_id
 							//not sure if it's necessary to load the sentence and 
 							//paper id anymore.
-							$('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);   
+							//(pre-mark-butchering:)
+							// $('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);   
+							$('#mynewcomment').load('/newcomment/' + sent_id + '&parent_id=' + <%= @paper.id.to_s %>) + '&parent_type=Paper';   
 						}
 					} else {
 					    // it's visible so do nothing
