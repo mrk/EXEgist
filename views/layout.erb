@@ -14,43 +14,22 @@
 		<script type="text/javascript">
 			$ (function(){
 				
+				//FOR NOW ADD THIS STAR
+				$('.comment').before('<a href="#" class="marker">*</a>');
 				
-				if ( $('.comment').length>0) {
-					var egg = $(this).removeClass('comment');
-					console.log('egg' + egg);
-					if ('.marker'.hasClass == egg) {
-						console.log('do nothing');
-					//DO NOTHING
-					}else{
-					
-						$('.comment').before('<a href="#" class="marker">*</a>').addClass(egg);
-					}
-				}
-				//if .comment class == .sentence.id
-				//add star after .sentence
+				//SO CLOSE TO GETTING STAR TO SHOW UP ONLY ONCE
+				// if ( $('.comment').length>0) {
+				// 					var egg = $(this).removeClass('comment');
+				// 					console.log('egg' + egg);
+				// 					if ('.marker'.hasClass == egg) {
+				// 						console.log('do nothing');
+				// 					//DO NOTHING
+				// 					}else{
+				// 					
+				// 						$('.comment').before('<a href="#" class="marker">*</a>').addClass(egg);
+				// 					}
+				// 				}
 				
-				//var eff = $('.comment').before('<a href="#" class="marker">*</a>');
-				//eff
-				//var f = $('.marker').nextUntil('.sentence');
-				//console.log(eff.length);
-				
-				//var f = $('.comment:first').nextUntil('.sentence');
-				//f.before('<a href="#" class="marker">*</a>')
-				//console.log(f);
-				// .before('<a href="#" class="marker">*</a>').nextUntil('.sentence');
-				
-				
-				// $('.comment:first')
-				// 				.before('<a href="#" class="marker">*</a>')
-				// 				
-				// 				.find('.sentence')
-				// 				.end();
-				
-				//$('.comment:first')		
-						//do nothing
-					//} else {
-						
-					//}
 				//COMMENT 
 				
 				//COMMENTS APPEAR AND DISAPPEAR WITH CLICK OF ASTERISK
