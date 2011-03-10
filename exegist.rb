@@ -52,7 +52,7 @@ class User
   property :id,         Serial
   property :username,   String, :required => true, :unique => true
   
-  has n, :comments
+  #has n, :test_comments
 end
 
 class TestComment
