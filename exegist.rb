@@ -124,7 +124,9 @@ end
 get '/papers/:id' do
   @paper = Paper.get(params[:id])
   @paperArray = @paper.body.split('.')
-  @all_comments = TestComment.all(:paper_id => @paper.id) 
+  @all_comments = TestComment.all(:paper_id => @paper.id)
+  #@userArray = @all_comments.username.index
+  #CREATE AN ARRAY OF THE USERNAMES AND THE NUMBER OF COMMENTS?
   # append <span class="comment">@all_comments.comment</span> where @all_comments.sentence_id == the "id" attribute of .sentence %>	
   # in jQuery, just add the star when you see it the span.
   session["current_paper"] = @paper.id.to_s

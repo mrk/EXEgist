@@ -296,9 +296,9 @@
 				<div id="contributors">
 					<h3>Contributors</h3>
 					<ul>
-						<% if @paper %>
-							<% for commentname in @all_comments %>									<li id="<%= commentname.username.to_s %>"><%= commentname.username.to_s %></li>
-							<% end %>
+							<% for commentname in @all_comments %>
+								
+									<li id="<%= commentname.username.to_s %>"><%= commentname.username.to_s %></li>
 						<% end%>
 					</ul>
 				</div>
