@@ -4,7 +4,7 @@
 	
 	<% for comment in @all_comments %>
 		<% if comment.sentence_id == index %>
-		<span class="comment <%= comment.sentence_id %>"><%= comment.comment %>CREATED AT<%= comment.created_at %></span>
+		<span class="comment <%= comment.sentence_id %>" id="<%= comment.id %>" style="display:none;"><%= comment.comment %></span>
 		<% end %>
 	<% end %>
 	
