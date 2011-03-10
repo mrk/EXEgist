@@ -134,6 +134,12 @@ input, textarea {
     padding: 15px;
     background: rgba(255,255,255,0.5);
     margin: 0 0 10px 0;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-size:14px;
+}
+
+input[type=text] {	
+   /* Awesome styling */
 }
 
 .clear{

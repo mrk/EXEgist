@@ -61,7 +61,7 @@ class TestComment
   belongs_to :paper
   
   property :id,           Serial
-  # property :username,     String
+  property :username,     String
   property :comment,      Text
   property :sentence_id,  Integer
   property :paper_id,     Integer
@@ -133,7 +133,7 @@ get '/papers/:id' do
 end
 
 post '/login' do
-  @user = User.first_or_create(:username => params[:user])
+  @user = User.first_or_create(:username => params[:username])
   session["current_user"] = @user.username
   redirect '/papers/' + session["current_paper"]
   # if @user
@@ -171,7 +171,7 @@ get '/newcomment/:sentence_id&paper_id=:paper_id' do
 end
 
 post '/receivedcomment' do
-  @comment = TestComment.new(:comment =>params[:comment], :sentence_id =>params[:sentence_id], :paper_id => params[:paper_id])
+  @comment = TestComment.new(:username =>params[:username], :comment =>params[:comment], :sentence_id =>params[:sentence_id], :paper_id => params[:paper_id])
   @comment.save
   #  redirect("/fanfic")
   #else

@@ -13,7 +13,7 @@
 		
 		<script type="text/javascript">
 			$ (function(){
-				
+								
 				//FOR NOW ADD THIS STAR
 				//done in paper.erb. Rune is a rockstar.
 				
@@ -296,10 +296,10 @@
 				<div id="contributors">
 					<h3>Contributors</h3>
 					<ul>
-						<li id="cshirky">cshirky</li>
-						<li>tomberenger</li>
-						<li>dreamsverse</li>
-						<li>baltarismyhomeboy</li>
+						<% if @paper %>
+							<% for commentname in @all_comments %>									<li id="<%= commentname.username.to_s %>"><%= commentname.username.to_s %></li>
+							<% end %>
+						<% end%>
 					</ul>
 				</div>
 					<div class="clear"></div>
