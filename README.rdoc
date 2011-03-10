@@ -20,15 +20,52 @@ CONTRIBUTORS - The ability to single out the contributions from a specific contr
 
 ________
 
-==Current Issues
+==Ruby / Sinatra Issues
 
-- OVERALL: It, you know, doesn't work n stuff.
+- DB: For our initial testing here, we are using SQLite3, but we will need to switch over to MySQL for the test with other humans.  My computer went on the fritz when I tried to use MySQL, so I jumped back to SQLite3.  
 
-- PAPER/ARTICLE SUBMISSION: We are currently able to post papers/articles.  But it's stripping the formatting.
+- DB MAPPING: Our current db construction is really poor.  We should have has n and belongs_to in several places:
 
-- COMMENT POSTS: I have no idea if the comments are actually going into the db.  I need some basic help with seeing what's in my db.  I am trying to pull up all the comments in showcomtest.erb and it's coming up as #, which either means there's nothing in there or I'm calling it wrong.
+	TestComment
+	belongs_to, :paper
+	belongs_to, :user
+	
+	Paper
+	has n, :comments
 
-- CONTRIBUTORS: (Solo / Mute)The goal is when you click on the contributor solo button, it shows only the contributions from that user.  This is currently opening every comment, not just the comments from the selected user.  Example is on wallace.erb.  The mute button is the opposite effect, to hide the user, but it hasn't been touched yet.  Ultimately, it would save your preferences as well. (Highlight) When the user scrolls over a comment from a user, their username lights up.
+	Users
+	has n, :comments
+	
+when we tried to implement this, the whole thing blew up.  
+
+- COMMENTS ON COMMENTS: The ultimate goal of this conversation space is to have comments on comments.  Only yesterday did we get the comments to appear in their designated paper.  Current Thinking:  add a comment_id to the TestComment model and in paper.erb, when you go through and add the comments, when a comment
+
+TestComment
+body
+name
+char_position
+text_id
+Parent_id
+
+First Order Comment
+Text_id: 1
+Parent_id: null
+Char_pos: 47
+
+Second Order Comment
+P_ID: 1
+Char_Pos
+Text_id: Null
+	
+________
+
+==jQuery Issues
+
+- PAPER/ARTICLE SUBMISSION: We are currently able to post papers/articles.  But it's stripping any formatting from the article that was posted.
+
+- COMMENT POSTS: The comments are going into the database! 
+
+- CONTRIBUTORS: (Solo / Mute) The goal is when you click on the contributor solo button, it shows only the contributions from that user.  This is currently opening every comment, not just the comments from the selected user.  Example is on wallace.erb.  The mute button is the opposite effect, to hide the user, but it hasn't been touched yet.  Ultimately, it would save your preferences as well. (Highlight) When the user scrolls over a comment from a user, their username lights up.
 
 _______
 
@@ -38,7 +75,7 @@ _______
 
 _______
 
-##Next Steps
+==Next Steps
 
 - Fix Current Issues
 
@@ -46,4 +83,13 @@ _______
 
 - 
 
+Given what we are trying to accomplish here, what would have been the best way to approach this concept?
+
+What are some common patterns that you would use given our intended framework?
+
+Do you know of any educational resources that we could have used in general for using Sinatra or perhaps Rails?
+
+I did the Pine.fm Learn to Program, Peepcode tutorial and we have a student-run Web Development Group every Tuesday.  
+
+is a critical explanation or interpretation of a text, especially a religious text.
 

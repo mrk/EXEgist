@@ -41,6 +41,10 @@ configure :development do
   #SQL ISSUE, NEED HELP
 end
 
+configure :production do
+  DataMapper::setup(:default, ENV['DATABASE_URL'])
+end
+
 
 class User
   include DataMapper::Resource
@@ -49,20 +53,6 @@ class User
   property :username,   String, :required => true, :unique => true
   
   has n, :comments
-end
-
-class Comment                            # classes map to tables
-  include DataMapper::Resource
-  
-  property :id,           Serial      # properties map to fields
-  property :text,         Text
-  property :level,        Integer
-  property :in_doc,       String
-  property :in_sentence,  String
-  property :created_at,   DateTime
-  #property :child_of, 
-  
-  belongs_to :user
 end
 
 class TestComment
@@ -76,7 +66,17 @@ class TestComment
   property :sentence_id,  Integer
   property :paper_id,     Integer
   property :created_at,   DateTime
-  
+
+
+  # @parent = Paper.get(params[:paper_id])
+  #   @parent = Comment.get(params[:comment_id])
+  #   Comment.create :parent_id => @parent.id, :parent_type => @parent.class.to_s
+    
+  # property :parent_type, String
+  # property :parent_id, Integer
+  # def parent
+  #     Kernel.const_get(parent_type).get(parent_id)
+  #   end
 end
 
 class Paper
