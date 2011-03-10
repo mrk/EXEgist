@@ -7,18 +7,18 @@ Build is in Ruby, Sinatra, DataMapper, SQLite3
 
 EXEgist is an experimental conversation spaces that provides the user with the ability to inline comment on any sentence in the article.  
 
-ADD COMMENT - Click on any sentence and you can read all the comments within it.
+- ADD COMMENT - Click on any sentence and you can read all the comments within it.
 If you have the add comment and click on the sentence, you'll be able to add a comment to it.  
 
 There are additional features on the sidebar
 
-COMMENT LENGTH - In the hopes of encouraging longer comments, we have an optional button that is auto-set to hide comments that are under 25 words.
+- COMMENT LENGTH - In the hopes of encouraging longer comments, we have an optional button that is auto-set to hide comments that are under 25 words.
 
-COMMENT DEPTH - The ability to see just see no comments, the first layer, or all the layers.  Ultimately the goal is to have the comment depth be controlled entirely by the user. 
+- COMMENT DEPTH - The ability to see just see no comments, the first layer, or all the layers.  Ultimately the goal is to have the comment depth be controlled entirely by the user. 
 
-CONTRIBUTORS - The ability to single out the contributions from a specific contributor to either see just their comments or mute their comments.
+- CONTRIBUTORS - The ability to single out the contributions from a specific contributor to either see just their comments or mute their comments.
 
-________
+
 
 ==Ruby / Sinatra Issues
 
@@ -32,7 +32,7 @@ INSERTING NTH ORDER COMMENTS
 
 - COMMENTS ON COMMENTS: The ultimate goal of this conversation space is to have comments on comments.  Only yesterday did we get the comments to appear in their designated paper.  
 	
-________
+
 
 ==jQuery Issues
 
@@ -52,13 +52,7 @@ ________
 
 - CONTRIBUTORS HIGHLIGHT: When you you are in Read Comments mode, it.
 
-_______
 
-==Minor Issues
-
-- COMMENT LENGTH: when you click on Comment Length, it will close anyhting under 25 comments.  However, when you click it again, it will open all the comments under 25.  This should simply reopen all the comments that were previously closed.  That's tricky and not necessary for the  demo.
-
-_______
 
 ==Next Steps
 
@@ -73,8 +67,3 @@ Given what we are trying to accomplish here, what would have been the best way t
 What are some common patterns that you would use given our intended framework?
 
 Do you know of any educational resources that we could have used in general for using Sinatra or perhaps Rails?
-
-I did the Pine.fm Learn to Program, Peepcode tutorial and we have a student-run Web Development Group every Tuesday.  
-
-is a critical explanation or interpretation of a text, especially a religious text.
-
