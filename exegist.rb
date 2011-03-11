@@ -11,8 +11,7 @@ require 'dm-types'
 enable :sessions
 #use Rack::Flash
 
-# helpers can be called inside any of the main methods
-helpers do
+class String
   def monkeyparse
     ary = self.gsub(/\n/," ").split(/([^\.\?\!]+[\.\?\!])/)
     ary.delete("")
@@ -38,7 +37,10 @@ helpers do
     end
     sentences
   end
-  
+end
+
+# helpers can be called inside any of the main methods
+helpers do  
 
   # Check to see if a user is logged in
   def logged_in?
@@ -184,7 +186,7 @@ end
 
 get '/papers/:id' do
   @paper = Paper.get(params[:id]) # notify david in case of change
-  @paperArray = @paper.body.split('.')
+  @paperArray = @paper.body.monkeyparse
   @all_comments = Comment.all(:paper_id => @paper.id)
   #for commentArray in @all_comments
    # @commentGet = @all_comments.get(params[:id])
@@ -244,7 +246,7 @@ end
 post '/receivedcomment' do
   @comment = Comment.new(:user_id =>params[:username],:paper_id =>params[:paper_id], :body =>params[:comment], :sentence_id =>params[:sentence_id], :parent_id => params[:parent_id], :parent_type => params[:parent_type])
   
-  @commentArray = @comment.body.split('.')
+  @commentArray = @comment.body.monkeyparse
   @newbody = ''
   #GIVE EACH SENTENCE AN ID
   @commentArray.each_with_index do |sentence, index|

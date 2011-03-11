@@ -57,3 +57,7 @@ INSERTING NTH ORDER COMMENTS
 - COMMENT ON COMMENTS
 
 - CHANGE READ/POST STRUCTURE: This would remove the button on the left that switches from read comments to add post.  Instead, when you clicked on a sentence, it would open up the comments below it.  On the right side of the sentence, there would be a button that would open up a Post Comment form.
+
+==Additional
+
+- Mad thanks to cocomo for the split_sentence code. http://snipplr.com/view.php?codeview&id=20306
