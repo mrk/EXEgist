@@ -7,6 +7,7 @@
 	<input type="hidden" name="sentence_id" id="sentence_id" value="<%= params[:parent_id] %>">
 	<input type="hidden" name="paper_id" id="paper_id" value="<%= session["current_paper"] %>">
 	<input type="hidden" name="parent_id" id="parent_id" value="<%= params[:parent_id]%>">
+	<input type="hidden" name="parent_type" id="parent_type" value="<%= params[:parent_type]%>">
 	<input type="submit" id="commentSubmit" value="Thank you." />
 </form>
 
@@ -21,7 +22,7 @@
 			var sentence_id = $('#sentence_id').val();
 			var paper_id = $('#paper_id').val();
 			var parent_id = $('#parent_id').val();
-			var parent_type = $('#<%= @paper.id.to_s %>').attr("title");
+			var parent_type = $('#parent_type').val();
 			//I THINK WHEN YOU CLICK ON THE SENTENCE, IT NEEDS TO GRAB THIS.
 			//SAME WITH THE PARENT_ID
 

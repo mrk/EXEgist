@@ -13,6 +13,32 @@ enable :sessions
 
 # helpers can be called inside any of the main methods
 helpers do
+  def monkeyparse
+    ary = self.gsub(/\n/," ").split(/([^\.\?\!]+[\.\?\!])/)
+    ary.delete("")
+    sentences = Array.new
+    str = ""
+    for i in 0..ary.size-1
+      next if ary[i].size == 0 || ary[i] =~ /^\s*$/
+      str << ary[i]
+      next if str =~ /Mr|Mrs|Ms|Dr|Mt|St\.$/
+      if (i < ary.size-1)
+        next if ary[i] =~ /[A-Z]\.$/
+        next if ary[i+1] =~ /^\s*[a-z]/
+      end
+      if ary[i+1] =~ /^\"/
+        str << '"'
+        ary[i+1].sub!(/^\"/,"")
+      elsif ary[i+1] =~ /^\)/
+        str << ')'
+        ary[i+1].sub!(/^\)/,"")
+      end
+      sentences << str.sub(/^\s+/,"")
+      str = ""
+    end
+    sentences
+  end
+  
 
   # Check to see if a user is logged in
   def logged_in?
@@ -71,7 +97,6 @@ class Comment
   property :parent_id,    Integer
   
   #A COMMENT CAN HAVE COMMENTS
-  
   
   #belongs_to, :user, 
   #belongs_to, :paper, 
@@ -161,7 +186,15 @@ get '/papers/:id' do
   @paper = Paper.get(params[:id]) # notify david in case of change
   @paperArray = @paper.body.split('.')
   @all_comments = Comment.all(:paper_id => @paper.id)
-  #@commentArray = @all_comments.body.split('.')
+  #for commentArray in @all_comments
+   # @commentGet = @all_comments.get(params[:id])
+  #  @commentSentenceSplit = commentArray.body.split('.')
+  #end
+  
+  ###
+  #@commentArray = c.body.split for c in @allcomments
+  ###
+  
   # @all_comments = Comment.all(:paper_id => @paper.id) # <-- old way
   session["current_paper"] = @paper.id.to_s
   authorize!  
@@ -210,6 +243,14 @@ end
 
 post '/receivedcomment' do
   @comment = Comment.new(:user_id =>params[:username],:paper_id =>params[:paper_id], :body =>params[:comment], :sentence_id =>params[:sentence_id], :parent_id => params[:parent_id], :parent_type => params[:parent_type])
+  
+  @commentArray = @comment.body.split('.')
+  @newbody = ''
+  #GIVE EACH SENTENCE AN ID
+  @commentArray.each_with_index do |sentence, index|
+    @newbody = @newbody + '<a href="#" class="clickable" id="' + index.to_s + '" title="Comment">' + sentence + '</a>'
+  end
+  @comment.body = @newbody
   #@comment.paper_id = params[]
   #@comment.parent_id = 
   #@comment.parent_type = 

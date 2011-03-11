@@ -11,16 +11,13 @@ LOGGED IN AS <%= session["current_user"] %>
 				<% asterisk_added = true %>
 			<% end %>
 			
-			<span class="comment <%= comment.sentence_id %>" id="<%= comment.id %>" style="display:none;"><a href="#" title="Comment"><%= comment.body %></a></span>
+			<span class="comment"><%= comment.body %></span>
 	
 		<% end %>
 	<% end %>	
 		
 	
 <% end %>
-
-
-	
 
 
 

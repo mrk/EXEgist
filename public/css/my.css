@@ -49,6 +49,12 @@ html,body{
 	display:none;
 }
 
+.comment > a{
+	color:black;
+	display:inline;
+	text-decoration:none;
+}
+
 .marker{
 	font-size: 30px;
 	vertical-align: text-top;

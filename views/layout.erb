@@ -126,7 +126,7 @@
 				
 				//NEW COMMENT
 				// $('#newcmt').click(function(){
-				$('.sentence').click(function(){
+				$('.sentence, .clickable').click(function(){
 					var thetitle = $(this).attr('title');
 					console.log('I AM A ' + thetitle);
 					if( !$('#thecomment').is(':visible') ) {
