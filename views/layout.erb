@@ -127,6 +127,8 @@
 				//NEW COMMENT
 				// $('#newcmt').click(function(){
 				$('.sentence').click(function(){
+					var thetitle = $(this).attr('title');
+					console.log('I AM A ' + thetitle);
 					if( !$('#thecomment').is(':visible') ) {
 						// it's not visible,
 						if (commentOn == true){
@@ -142,7 +144,10 @@
 							//load the newCommment page with sentence id & paper_id
 							//not sure if it's necessary to load the sentence and 
 							//paper id anymore.
-							$('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);   
+							//(pre-mark-butchering:)
+							// $('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);   
+							$('#mynewcomment').load('/newcomment/' + sent_id + '&parent_type=' + thetitle);  
+							// + sent_id + '&parent_id=' + <%= @paper.id.to_s %>) + '&parent_type=Paper' 
 						}
 					} else {
 					    // it's visible so do nothing
@@ -296,9 +301,11 @@
 				<div id="contributors">
 					<h3>Contributors</h3>
 					<ul>
+						<% if @paper %>
 							<% for commentname in @all_comments %>
 								
-									<li id="<%= commentname.username.to_s %>"><%= commentname.username.to_s %></li>
+									<li id="<%= commentname.user_id.to_s %>"><%= commentname.user_id.to_s %></li>
+							<% end %>
 						<% end%>
 					</ul>
 				</div>

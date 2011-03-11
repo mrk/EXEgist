@@ -5,8 +5,6 @@ require 'dm-migrations'
 require 'dm-timestamps'
 require 'dm-validations'
 require 'dm-types'
-#require 'dm-mysql-adapter'
-#require 'mysql'
 #require 'rack-flash'
 
 # enable sessions (for login/cookies)
@@ -18,7 +16,6 @@ helpers do
 
   # Check to see if a user is logged in
   def logged_in?
-    #if request.cookies['userid']
     if session["current_user"]
       true
     else
@@ -52,31 +49,61 @@ class User
   property :id,         Serial
   property :username,   String, :required => true, :unique => true
   
-  #has n, :test_comments
+  has n, :comments #how to pull this off...add comment_id?
 end
 
-class TestComment
+class Comment
+  # replace all instances of TestComment w Comment
   include DataMapper::Resource
   
-  belongs_to :paper
+  #belongs_to :paper
+  #belongs_to :user
   
   property :id,           Serial
-  property :username,     String
-  property :comment,      Text
+  property :user_id,      String
+  # property :comment,      Text   #replaced with:
+  property :body,         Text # 
   property :sentence_id,  Integer
   property :paper_id,     Integer
   property :created_at,   DateTime
+  # the following two properties replace :paper_id
+  property :parent_type,  String
+  property :parent_id,    Integer
+  
+  #A COMMENT CAN HAVE COMMENTS
+  
+  
+  #belongs_to, :user, 
+  #belongs_to, :paper, 
+  #belongs_to, :parent_id
+  
+  # finds a comment's parent, regardless of type
+  def parent
+    Kernel.const_get(parent_type).get(parent_id)
+  end
+  
+  # specifies whether a comment is primary (top-level) or not
+  def primary?
+    if self.parent_type = "Paper"
+      true
+    else
+      false
+    end
+  end
+  
+  # also defined for the Paper class
+  def comments
+    Comment.all(
+      :parent_type => "Comment",
+      :parent_id => self.id
+    )
+  end
 
-
-  # @parent = Paper.get(params[:paper_id])
-  #   @parent = Comment.get(params[:comment_id])
-  #   Comment.create :parent_id => @parent.id, :parent_type => @parent.class.to_s
-    
-  # property :parent_type, String
-  # property :parent_id, Integer
-  # def parent
-  #     Kernel.const_get(parent_type).get(parent_id)
-  #   end
+  # --GREG'S EXAMPLE CODE--
+    # @parent = Paper.get(params[:paper_id])
+    #   @parent = Comment.get(params[:comment_id])
+    #   Comment.create :parent_id => @parent.id, :parent_type => @parent.class.to_s
+  
 end
 
 class Paper
@@ -85,11 +112,20 @@ class Paper
   property :id,         Serial
   property :body,       Text
   
+  # also defined for the Comment class
+  def comments
+    Comment.all(
+      :parent_type => "Paper",
+      :parent_id => id
+    )
+  end
+  
 end
 
 
 configure :development do
   DataMapper .auto_upgrade!
+  #DataMapper .auto_migrate!
 end
   
 before do
@@ -122,13 +158,11 @@ post '/papers/new' do
 end
 
 get '/papers/:id' do
-  @paper = Paper.get(params[:id])
+  @paper = Paper.get(params[:id]) # notify david in case of change
   @paperArray = @paper.body.split('.')
-  @all_comments = TestComment.all(:paper_id => @paper.id)
-  #@userArray = @all_comments.username.index
-  #CREATE AN ARRAY OF THE USERNAMES AND THE NUMBER OF COMMENTS?
-  # append <span class="comment">@all_comments.comment</span> where @all_comments.sentence_id == the "id" attribute of .sentence %>	
-  # in jQuery, just add the star when you see it the span.
+  @all_comments = Comment.all(:paper_id => @paper.id)
+  #@commentArray = @all_comments.body.split('.')
+  # @all_comments = Comment.all(:paper_id => @paper.id) # <-- old way
   session["current_paper"] = @paper.id.to_s
   authorize!  
   erb :paper
@@ -167,13 +201,19 @@ get '/fanfic' do
   erb :fanfic 
 end
 
-get '/newcomment/:sentence_id&paper_id=:paper_id' do
-  @paperpage = params[:paper_id]
+get '/newcomment/:parent_id&parent_type=:parent_type' do
+  # replaces @paperpage
+  #@myparent = params[:parent_id]
+  #@myparenttype = params[:parent_type]
   erb :comment, :layout => false
 end
 
 post '/receivedcomment' do
-  @comment = TestComment.new(:username =>params[:username], :comment =>params[:comment], :sentence_id =>params[:sentence_id], :paper_id => params[:paper_id])
+  @comment = Comment.new(:user_id =>params[:username],:paper_id =>params[:paper_id], :body =>params[:comment], :sentence_id =>params[:sentence_id], :parent_id => params[:parent_id], :parent_type => params[:parent_type])
+  #@comment.paper_id = params[]
+  #@comment.parent_id = 
+  #@comment.parent_type = 
+  #:username =>params[:username], :paper_id => params[:paper_id]
   @comment.save
   #  redirect("/fanfic")
   #else
@@ -186,12 +226,16 @@ end
 
 #TEST FOR ADDING COMMENTS
 get '/showcomtest' do
-  @mycomments = TestComment.all(:order => [:created_at.desc])
+  @mycomments = Comment.all(:order => [:created_at.desc])
   
   erb :showcomtest, :layout => false
 end
 
-
+#TEST FOR SEEING ALL THE PAPERS
+get '/showpapertest' do
+  @mypaper = Paper.all
+  erb :showpapertest
+end
 
 #GREG'S WAY OF PARSING THE SENTENCES SERVER SIDE
 # also add:   - generate sequential unique ids

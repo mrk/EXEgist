@@ -1,8 +1,8 @@
 <h1>My Comment Test</h1>
 <% for comment in @mycomments %>
-	<h4><%= comment.username %></h4>
+
 	<h4><%= comment.paper_id %></h4>
-	<p><%= comment.sentence_id %></p>
-	<p><%= comment.comment %>.</p>
-	<p>CREATED AT<%= comment.created_at %></p>
+	<p><%= comment.user_id %>....hm.</p>
+	<p><%= comment.body %>.</p>
+	<p><%= comment.parent_type %></p>
 <% end %>
