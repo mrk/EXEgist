@@ -7,6 +7,25 @@ require 'dm-validations'
 require 'dm-types'
 #require 'rack-flash'
 
+module Sinatra::Partials
+  def partial(template, *args)
+    template_array = template.to_s.split('/')
+    template = template_array[0..-2].join('/') + "/_#{template_array[-1]}"
+    options = args.last.is_a?(Hash) ? args.pop : {}
+    options.merge!(:layout => false)
+    if collection = options.delete(:collection) then
+      collection.inject([]) do |buffer, member|
+        buffer << erb(:"#{template}", options.merge(:layout =>
+        false, :locals => {template_array[-1].to_sym => member}))
+      end.join("\n")
+    else
+      erb(:"#{template}", options)
+    end
+  end
+end
+
+helpers Sinatra::Partials
+
 # enable sessions (for login/cookies)
 enable :sessions
 #use Rack::Flash
@@ -55,7 +74,7 @@ helpers do
   def authorize!
     redirect '/login' unless logged_in?
   end
-
+    
 end
 
 # sets up DB
@@ -118,13 +137,13 @@ class Comment
     end
   end
   
-  # also defined for the Paper class
-  def comments
-    Comment.all(
-      :parent_type => "Comment",
-      :parent_id => self.id
-    )
-  end
+  # # also defined for the Paper class
+  #  def comments
+  #    Comment.all(
+  #      :parent_type => "Comment",
+  #      :parent_id => self.id
+  #    )
+  #  end
 
   # --GREG'S EXAMPLE CODE--
     # @parent = Paper.get(params[:paper_id])
@@ -236,7 +255,7 @@ get '/fanfic' do
   erb :fanfic 
 end
 
-get '/newcomment/:parent_id&parent_type=:parent_type' do
+get '/newcomment/:sentence_id&parent_type=:parent_type&parent_id=:parent_id' do
   # replaces @paperpage
   #@myparent = params[:parent_id]
   #@myparenttype = params[:parent_type]
@@ -249,15 +268,19 @@ post '/receivedcomment' do
   @commentArray = @comment.body.monkeyparse
   @newbody = ''
   #GIVE EACH SENTENCE AN ID
+  @theparentid = Comment.last.id.to_i + 1
   @commentArray.each_with_index do |sentence, index|
-    @newbody = @newbody + '<a href="#" class="clickable" id="' + index.to_s + '" title="Comment">' + sentence + '</a>'
-  end
+    @newbody = @newbody + '<a href="#" class="clickable" id="' + index.to_s + '" name="' + @theparentid.to_s + '" title="Comment">' + sentence + '</a>' 
+  end  
   @comment.body = @newbody
+  
   #@comment.paper_id = params[]
   #@comment.parent_id = 
   #@comment.parent_type = 
   #:username =>params[:username], :paper_id => params[:paper_id]
   @comment.save
+  
+  
   #  redirect("/fanfic")
   #else
   #end

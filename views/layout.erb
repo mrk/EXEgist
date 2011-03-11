@@ -132,7 +132,8 @@
 					if( !$('#thecomment').is(':visible') ) {
 						// it's not visible,
 						if (commentOn == true){
-							var sent_id = $(this).attr("id");
+							var sent_id = $(this).attr("id"); /////
+							var par_id = $(this).attr("name");
 							$(this).after('<span id="mynewcomment"></span>');
 							var new_cmt_seen = $('#mynewcomment').css('display');
 							//find .visible instead of .css(display)
@@ -140,13 +141,13 @@
 								$('#mynewcomment').slideDown('fast').css("display","block"); //show()
 							} else {
 							}
-							console.log("about to load new comment" + sent_id);
+							console.log("about to load new comment" + sent_id + "and parent_id is" + par_id);
 							//load the newCommment page with sentence id & paper_id
 							//not sure if it's necessary to load the sentence and 
 							//paper id anymore.
 							//(pre-mark-butchering:)
 							// $('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);   
-							$('#mynewcomment').load('/newcomment/' + sent_id + '&parent_type=' + thetitle);  
+							$('#mynewcomment').load('/newcomment/' + sent_id + '&parent_type=' + thetitle + '&parent_id=' + par_id);  
 							// + sent_id + '&parent_id=' + <%= @paper.id.to_s %>) + '&parent_type=Paper' 
 						}
 					} else {

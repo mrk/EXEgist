@@ -2,7 +2,9 @@
 <% for comment in @mycomments %>
 
 	<h4><%= comment.paper_id %></h4>
-	<p><%= comment.user_id %>....hm.</p>
+	<p>The parent_id is <%= comment.parent_id %></p>
+	<p>The parent_type is <%= comment.parent_type %></p>
+	<p><%= comment.user_id %>.</p>
 	<p><%= comment.body %>.</p>
 	<p><%= comment.parent_type %></p>
 <% end %>

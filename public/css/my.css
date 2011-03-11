@@ -159,7 +159,7 @@ input[type=text] {
 	color: black;
 }
 
-.sentence:hover{
+.comment a:hover, .sentence:hover{
 	/*color: #7098ad;*/
 	background-color: #cde6fc;
 }

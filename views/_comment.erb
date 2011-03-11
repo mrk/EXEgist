@@ -1,0 +1,22 @@
+<span class="comment"><%= comment.body %></span>
+
+<% for c in @all_comments %>
+	<% asterisk_added = false %>
+	<% comment_split = c.body.split(/(?=<a)/) %>
+	<% for d in comment_split %>
+	<%# VARIABLE FOR A TAG'S ID%>
+		<% if c.parent_id == comment.id && c.sentence_id == comment_split.index(d) && c.parent_type == "Comment" %>
+		<% if !asterisk_added %>
+			<a href="#" class="marker">*</a>
+			<% asterisk_added = true %>
+		<% end %>
+			<%= partial(:comment, :locals => {:comment => c}) %>
+		<% end %>
+	<% end %>
+<% end %>
+
+<%# unless comment.comments.empty? %>
+	<%# for nested_comment in comment.comments %>
+		<%#= partial(:comment, :locals => {:comment => nested_comment}) %>
+	<%# end %>
+<%# end %>
