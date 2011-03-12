@@ -22,25 +22,19 @@ There are additional features on the sidebar
 
 ==Ruby / Sinatra Issues
 
-- DB: RESOLVED.  From what we can tell, we were able to do a production version in Postgres on Heroku with no issue so far.  
-
-- DB MAPPING: (CURRENTLY WORKING ON) We are going to rewrite the TestComment DB to connect to Parent types and Parent id's and offer up comment or post via polymorphism.  This will need to coincide with a rewrite of the comment.erb to include the type and id and a rewrite of how comments are inserted in paper.erb
+- DB MAPPING: (CURRENTLY WORKING ON) The Comment model should connect to Parent types and Parent id's and offer up comment or post via polymorphism.  This will need to coincide with a rewrite of the comment.erb to include the type and id and a rewrite of how comments are inserted in paper.erb
 INCL: 
 POST COMMENTS
 INSERTING FIRST ORDER COMMENTS
 INSERTING NTH ORDER COMMENTS
 
-- COMMENTS ON COMMENTS: The ultimate goal of this conversation space is to have comments on comments.  Only yesterday did we get the comments to appear in their designated paper.  
+- COMMENTS ON COMMENTS: The ultimate goal of this conversation space is to have comments on comments.  The comments are appearing in the file, but they are not nesting.  
 	
 
 
 ==jQuery Issues
 
-- COMMENT DEPTH: Create ability to Switch between Show No Comments, Show First Order Comments, and Show All Comments
-
-- MIN WORD LENGTH: This is working on /wallace, but not on /papers/6.  It should hide all comments that are shorter than 25 words.  Then, once that works, set it to default to On.
-
-- PAPER/ARTICLE SUBMISSION: We are currently able to post papers/articles.  But it's stripping any formatting from the article that was posted.
+- COMMENT DEPTH: Create ability to Show First Order Comments
 
 - COMMENT POSTS: Needs to be rewritten with the new db structure. 
 
@@ -58,6 +52,12 @@ INSERTING NTH ORDER COMMENTS
 
 - CHANGE READ/POST STRUCTURE: This would remove the button on the left that switches from read comments to add post.  Instead, when you clicked on a sentence, it would open up the comments below it.  On the right side of the sentence, there would be a button that would open up a Post Comment form.
 
+- Learn Rails.
+
+- Start from scratch and build it in Rails.
+
 ==Additional
 
 - Mad thanks to cocomo for the split_sentence code. http://snipplr.com/view.php?codeview&id=20306
+
+- HUGE thank you to Rune, Greg, Daniel.
