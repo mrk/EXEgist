@@ -3,7 +3,7 @@
 	<label>Username</label><br />
 	<input type="hidden" name="username" id="username" value="<%= session["current_user"] %>"><br />
 	<label>Comment</label><br />
-	<textarea rows="20" cols="20" name="comment" id="comment" value=""></textarea><br />
+	<textarea rows="10" cols="70" name="comment" id="comment" value=""></textarea><br />
 	<input type="hidden" name="sentence_id" id="sentence_id" value="<%= params[:sentence_id] %>">
 	<input type="hidden" name="paper_id" id="paper_id" value="<%= session["current_paper"] %>">
 	<input type="hidden" name="parent_id" id="parent_id" value="<%= params[:parent_id]%>">
