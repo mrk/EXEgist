@@ -34,10 +34,13 @@
 					//SELECT ALL SPANS THAT ARE BEFORE THE NEXT .sentence
 					var comments_seen = $(f).css('display');
 					if (comments_seen == 'none') {
-						$(f).slideDown('slow').css("display","block");
+						//$(f).slideDown('slow').css("display","block");
+						filterShortComments();
+						
 					} else {
 						$(f).slideUp('slow');
 					}
+					
 				});
 
 				//HIDE SHORT COMMENTS
@@ -89,13 +92,62 @@
 						
 					}
 				}
+				
+				// hide all comments
+				function hideAllComments(){
+					$(".comment").slideUp('slow').css("display","hidden");
+					return false;
+				}
+				
+				$("#hideAllComments").click(hideAllComments);
+				
+				// show all comments
+				function showAllComments(){
+					$(".comment").slideDown('slow').css("display","block");
+					return false;
+				}
+				$("#showAllComments").click(showAllComments);
+				
+				
+				// show first order comments
+				function showFirstOrderComments(){
+					// for first order comments:
+					// <div class="firstComment comment">
+					// for non-first order:
+					// <div class="comment">
+					$(".firstComment").slideDown('slow').css("display","block");
+
+					return false;
+				}
+				
+				$("#showFirstOrderComments").click(showFirstOrderComments);
+				
+				
+				// hide long comments
+				function hideShortComments(){
+					$(".shortComment").slideUp('slow').css('display', 'hidden');
+					return false;
+				}
+				
+				$("#hideShortComments").click(hideShortComments);
+				
+				
+				// show long comments
+				function showShortComments(){
+					$(".shortComment").slideDown('slow').css('display', 'block');
+					return false;
+				}
+				
+				$("#showShortComments").click(showShortComments);
+				
+				
+					
+				
+			
+				
 				//ON COMMENT_LENGTH CLICK, 
 				$('#short_comments').delegate("input:checkbox", "click", function(){		
-					if($(this).attr('checked')){
-						$(".shortComment").slideUp('slow').css("display","block");
-					} else {
-						$(".shortComment").slideDown('slow').css("display","block");
-					}
+					filterShortComments();
 					
 					// var arr = [];
 					// 					//create the array
@@ -297,17 +349,30 @@
 				</div>
 				<div id="comment_depth">
 					<h3>Comment Depth</h3>
-					<form>
+					<ul>
+						<li><a href="#" id="hideAllComments">Hide all</a></li>
+						<li><a href="#" id="showAllComments">Show all</a></li>
+						<li><a href="#" id="showFirstOrderComments">Show only first</a></li>
+						
+					</ul>
+					<!--><form>
 						<li><input type="radio" name="depth" value="comment_0" value="" />No Comments</li>
 						<li><input type="radio" name="depth" value="comment_1" />First Comments</li>
 						<li><input type="radio" name="depth" value="comment_all" />All Comments</li>
-					</form>
+					</form>-->
 				</div>
 				<div id="comment_length">
 					<h3>Comments Length</h3>
-					<form id="short_comments">
+					<ul>
+						<li><a href="#" id="hideShortComments">Hide short comments</a></li>
+						<li><a href="#" id="showShortComments">Show short comments</a></li>
+						
+					</ul>
+					<!-- <form id="short_comments">
 						<input type="checkbox" name="shrt_comments" value="shrt_comments" />25 Word Minimum<br />
 					</form>
+					-->
+					
 					<!-- <label for="amount">Minimum:</label>
 										<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25"> -->
 				</div>
