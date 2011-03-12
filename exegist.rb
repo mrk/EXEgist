@@ -32,7 +32,8 @@ enable :sessions
 
 class String
   def monkeyparse
-    ary = self.gsub(/\n/," ").split(/([^\.\?\!]+[\.\?\!])/)
+    # ary = self.split(/([^\.\?\!]+[\.\?\!])/)
+    ary = self.gsub(/\n/,"</p><p>").split(/([^\.\?\!]+[\.\?\!])/)
     ary.delete("")
     sentences = Array.new
     str = ""

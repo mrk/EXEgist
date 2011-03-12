@@ -12,6 +12,12 @@
 
 		
 		<script type="text/javascript">
+			if(!console){
+				console = {
+					log : function(){}
+				}
+				
+			}
 			$ (function(){
 								
 				//FOR NOW ADD THIS STAR
@@ -63,6 +69,7 @@
 				function showMyComments() {
 					console.log('show my comments');
 					console.log(this);
+					
 					var e = $("#"+this[0]);
 					var words = e.text().split(" ");
 					var wordcount = words.length;
@@ -84,22 +91,28 @@
 				}
 				//ON COMMENT_LENGTH CLICK, 
 				$('#short_comments').delegate("input:checkbox", "click", function(){		
-					var arr = [];
-					//create the array
-					$('#thework')
-					.find('span')
-					.each(function(){ arr.push(this.id); });
+					if($(this).attr('checked')){
+						$(".shortComment").slideUp('slow').css("display","block");
+					} else {
+						$(".shortComment").slideDown('slow').css("display","block");
+					}
 					
-					console.log('checkbox has been clicked');
-						if (this.checked == true) {	
-							//RUN HIDE COMMENTS
-							jQuery.each(arr, hideMyComments
-							)
-							} else {
-								jQuery.each(arr, showMyComments
-								)	
-							}
-							
+					// var arr = [];
+					// 					//create the array
+					// 					$('#thework')
+					// 					.find('span')
+					// 					.each(function(){ arr.push(this.id); });
+					// 					
+					// 					console.log('checkbox has been clicked');
+					// 						if (this.checked == true) {	
+					// 							//RUN HIDE COMMENTS
+					// 							jQuery.each(arr, hideMyComments
+					// 							)
+					// 							} else {
+					// 								jQuery.each(arr, showMyComments
+					// 								)	
+					// 							}
+					// 							
 					
 				});
 				
@@ -221,28 +234,27 @@
 						//FOR EACH IN THE ARRAY
 						$(arr).each(function(){
 							var e1 = $("#"+this[0]);
+							
 							//var e1 = $(this);
 							var comments_seen1 = e1.css('display');
 							
 							//IF THE CLICK'S VALUE IS 
 							if ($(theClick).val() == 'comment_0') {
 								//IF THIS COMMENTS BLOCK
-								if (comments_seen1 == 'block'){
-								//
-								e1.slideUp('slow');
-								console.log('made it');
-								}
+								$(".comment").slideUp('slow').css("display","hidden");
 							console.log ('No Comments!');
 							} else if ($(theClick).val() == 'comment_1') {
-									//
+								// for first order comments:
+								// <div class="firstComment comment">
+								// for non-first order:
+								// <div class="comment">
+								$(".firstComment").slideDown('slow').css("display","block");	//
 								console.log ('First Comments!');
 							} else if ($(theClick).val() == 'comment_all') {
 								//IF THE COMMENT DISPLAY VALUE IS NONE
-								if (comments_seen1 == 'none'){
-								//
-								e1.slideDown('slow').css("display","block");	
-								}
+						
 									//
+									$(".comment").slideDown('slow').css("display","block");
 								console.log ('All Comments!');
 							}
 						});
