@@ -1,11 +1,12 @@
 ==EXEgist
+UPDATED 110312
 Version: So Alpha It Hurts.
 
 ITP Midterm project for Designing Conversation Spaces at ITP, 2011.
 
 Build is in Ruby, Sinatra, DataMapper, SQLite3
 
-EXEgist is an experimental conversation spaces that provides the user with the ability to inline comment on any sentence in the article.  
+EXEgist is an experimental conversation space that provides the user with the ability to comment inline on any sentence in an article.  
 
 - ADD COMMENT - Click on any sentence and you can read all the comments within it.
 If you have the add comment and click on the sentence, you'll be able to add a comment to it.  
@@ -19,6 +20,34 @@ There are additional features on the sidebar
 - CONTRIBUTORS - The ability to single out the contributions from a specific contributor to either see just their comments or mute their comments.
 
 
+==Latest Changes (mrk 110312 update)
+TODO
+--------
+
+- fix line spacing for <h2> and <h3> tag styling
+- add username to comments posted!
+- we could probably stand to improve the instructions, both in terms of the text and by putting it somewhere besides the login page.
+
+
+CURRENT BIG BUGS
+---------
+- the "add a comment" form cannot be closed once opened.
+- adding a comment on a comment inexplicably added a duplicate of the comment on another random comment!
+- normal expand/collapse controls (clicking on the comments) doesn't always work (esp. for short comments) - since the sidebar controls seem to work well, you we should think about translating their form to the normal expand/collapse behavior.
+
+
+CHANGELOG
+------------------
+- added instructions/introduction to the login page
+- added "logged in as" indicator
+- misc. minor cosmetic tweaks
+- fixed textbox sizes for newpaper form and comment form
+- added :title and :author properties to Paper model & made them display with elegance.
+- hid the Contributors section of the sidebar
+- hid "show only first comments" item for later implementation
+- added crest of alphahood
+
+
 
 ==Ruby / Sinatra Issues
 
@@ -30,7 +59,7 @@ POST COMMENTS
 INSERTING FIRST ORDER COMMENTS
 INSERTING NTH ORDER COMMENTS
 
-- COMMENTS ON COMMENTS: The ultimate goal of this conversation space is to have comments on comments.  Only yesterday did we get the comments to appear in their designated paper.  
+- COMMENTS ON COMMENTS: The ultimate goal of this conversation space is to have comments on comments.  Semifunctional at the moment but still full of display, arrangement, and interaction bugs.
 	
 
 
@@ -61,3 +90,5 @@ INSERTING NTH ORDER COMMENTS
 ==Additional
 
 - Mad thanks to cocomo for the split_sentence code. http://snipplr.com/view.php?codeview&id=20306
+- rune madsen is a gentleman and a scholar.
+- thankyouthankyouthankyou @atduskgreg for sage wisdom and emergency assistance.

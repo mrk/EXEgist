@@ -94,10 +94,15 @@ a{
 	line-height: 21px;
 }
 
-#comment_depth li {
+/*
+mark's quick styling fix to make things consistent
+to restore sanity, uncomment the block below
+*/
+
+/*#comment_depth, li {
 	list-style-type: none;
 	list-style-position: outside;
-}
+}*/
 
 
 #contributors ul li{
@@ -178,7 +183,7 @@ input[type=text] {
 
 /* THE LOGIN */
 #the_login{
-	margin: 100px auto;
+	margin: 30px auto;
 	width:200px;
 	/*border-right: 1px solid #ddd;*/
 	border-radius: 10px;  

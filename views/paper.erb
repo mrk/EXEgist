@@ -5,6 +5,9 @@
 	}
 </style>
 
+<h2><%= @paper.title %></h2>
+<h3>by <%= @paper.author %></h3>
+
 <% @paperArray.each_with_index do |sentence, index| %>
 	<%= '<a href="#" class="sentence" name="' + @paper.id.to_s + '" title="Paper" id="' + index.to_s + '">' + sentence + "</a>" 
 	%>

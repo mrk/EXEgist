@@ -158,6 +158,8 @@ class Paper
   
   property :id,         Serial
   property :body,       Text
+  property :title,      String
+  property :author,     String
   
   # also defined for the Comment class
   def comments
@@ -196,7 +198,7 @@ get '/papers/new' do
 end
 
 post '/papers/new' do
-  @newpaper = Paper.new(:body => params[:body])
+  @newpaper = Paper.new(:title => params[:title], :author => params[:author], :body => params[:body])
   if @newpaper.save
     redirect '/papers/' + @newpaper.id.to_s
   else
