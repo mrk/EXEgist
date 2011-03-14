@@ -173,8 +173,8 @@ end
 
 
 configure :development do
-  DataMapper .auto_upgrade!
-  #DataMapper .auto_migrate!
+  #DataMapper .auto_upgrade!
+  DataMapper .auto_migrate!
 end
   
 before do
