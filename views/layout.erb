@@ -34,8 +34,8 @@
 					//SELECT ALL SPANS THAT ARE BEFORE THE NEXT .sentence
 					var comments_seen = $(f).css('display');
 					if (comments_seen == 'none') {
-						//$(f).slideDown('slow').css("display","block");
-						filterShortComments();
+						$(f).slideDown('slow').css("display","block");
+						//filterShortComments();
 						
 					} else {
 						$(f).slideUp('slow');
@@ -147,7 +147,7 @@
 				
 				//ON COMMENT_LENGTH CLICK, 
 				$('#short_comments').delegate("input:checkbox", "click", function(){		
-					filterShortComments();
+					//filterShortComments();
 					
 					// var arr = [];
 					// 					//create the array
@@ -179,6 +179,7 @@
 					$('#annotation p').toggle();
 					if (commentOn == true) {
 						commentOn = false;
+						$('#mynewcomment').slideUp();
 					} else {
 					commentOn = true;
 					}
@@ -344,8 +345,8 @@
 				<h3 align="center"><b>"so alpha it hurts"</b></h3>
 				<div id="annotation">
 					<a href="#">
-						<p>Read Comments</p>
-						<p id="alt" style="display:none">Add a Comment</p>
+						<p>Commenting is OFF</p>
+						<p id="alt" style="display:none">Commenting is ON</p>
 						</a>
 				</div>
 				<div id="comment_depth">

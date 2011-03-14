@@ -1,4 +1,4 @@
-<span class=" <%= comment.body.split(' ').length < 25 ? "shortComment" : "longComment" %> comment"><%= comment.body %></span>
+<span class=" <%= comment.body.split(' ').length < 25 ? "shortComment" : "longComment" %> comment"><strong><%= comment.user_id %></strong><br /><%= comment.body %></span>
 
 <% for c in @all_comments %>
 	<% asterisk_added = false %>
