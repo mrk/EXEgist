@@ -5,7 +5,7 @@ require 'dm-migrations'
 require 'dm-timestamps'
 require 'dm-validations'
 require 'dm-types'
-require 'rack/google-analytics'
+require 'lib/rack/google-analytics'
 #require 'rack-flash'
 
 module Sinatra::Partials
