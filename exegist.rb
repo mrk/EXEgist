@@ -5,6 +5,7 @@ require 'dm-migrations'
 require 'dm-timestamps'
 require 'dm-validations'
 require 'dm-types'
+require 'rack/google-analytics'
 #require 'rack-flash'
 
 module Sinatra::Partials
@@ -29,6 +30,9 @@ helpers Sinatra::Partials
 # enable sessions (for login/cookies)
 enable :sessions
 #use Rack::Flash
+
+# add Google Analytics
+use Rack::GoogleAnalytics, :tracker => 'UA-297286-16'
 
 class String
   def monkeyparse
@@ -157,7 +161,7 @@ class Paper
   include DataMapper::Resource
   
   property :id,         Serial
-  property :body,       Text
+  property :body,       Text,   :length => 5000000
   property :title,      String
   property :author,     String
   
@@ -176,6 +180,10 @@ configure :development do
   DataMapper .auto_upgrade!
   #DataMapper .auto_migrate!
 end
+  
+  
+  
+  
   
 before do
   headers "Content-Type" => "text/html; charset=utf-8"
