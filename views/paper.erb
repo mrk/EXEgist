@@ -6,7 +6,7 @@
 </style>
 
 <h2><%= @paper.title %></h2>
-<% if @paper.author %>
+<% if !@paper.author.empty? %>
 <h3>by <%= @paper.author %></h3>
 <% end %>
 
