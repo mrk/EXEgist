@@ -3,7 +3,7 @@
 <% for c in @all_comments %>
 	<% asterisk_added = false %>
 	<% comment_split = c.body.split(/(?=<a)/) %>
-	<% for d in comment_split %>
+	<% c.body.split(/(?=<a)/).each do |d| %>
 	<%# VARIABLE FOR A TAG'S ID%>
 		<% if c.parent_id == comment.id && c.sentence_id == comment_split.index(d) && c.parent_type == "Comment" %>
 		<% if !asterisk_added %>
