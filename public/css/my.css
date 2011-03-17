@@ -165,8 +165,9 @@ input[type=text] {
 	color: black;
 }
 
-.comment a:hover, .sentence:hover{
-	/*color: #7098ad;*/
+.sentence:hover{
+/*	.comment a:hover, 
+	color: #7098ad;*/
 	background-color: #cde6fc;
 }
 

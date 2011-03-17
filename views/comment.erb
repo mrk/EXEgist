@@ -31,14 +31,14 @@
 				data: 'username=' + username + '&comment=' + comment + '&sentence_id=' + sentence_id + '&paper_id=' + paper_id + '&parent_id=' + parent_id + '&parent_type=' + parent_type ,
 
 				success: function(result) {
-					console.log(username);
+					//console.log(username);
 					$('#mynewcomment').slideUp('fast');
 					$('#' + sentence_id).after('<span class="comment ' + sentence_id + '">' + comment + '</span>');
-					console.log('just added comment');
+					//console.log('just added comment');
 					$('#' + sentence_id).after('<a href="#" class="marker">*</a>');
 					
 					$('#loading').fadeOut(500, function() {
-					console.log('about to remove');
+					//console.log('about to remove');
 					$('#mynewcomment').remove();
 					
 					});

@@ -9,62 +9,129 @@
 
 		<link rel="stylesheet" href="/ui-themes/aristo/jquery.ui.all.css"> 
 		<script src="/js/jquery-ui-1.8.5.min.js"></script>
-
-		
+				
 		<script type="text/javascript">
-			if(!console){
-				console = {
-					log : function(){}
-				}
+					
+			// if(!console){
+			// 				console = {
+			// 					log : function(){}
+			// 				}
+			// 				
+			// 			}
+			
+			$(function(){
 				
-			}
-			$ (function(){
-								
-				//FOR NOW ADD THIS STAR
-				//done in paper.erb. Rune is a rockstar.
+				/*	Setup variables
+				_______________________________________________________________________________ */
 				
-				//COMMENT 
+				var commentOn = true;
 				
-				//COMMENTS APPEAR AND DISAPPEAR WITH CLICK OF ASTERISK
-				$('.marker, .sentence').click(function(){
-					//ALL COMMENTS UNTIL THE NEXT SENTENCE.
-					var f = $(this).nextUntil('.sentence','.comment');
-					console.log(f);
-					//IF READ COMMENTS IS ON
-					//SELECT ALL SPANS THAT ARE BEFORE THE NEXT .sentence
-					var comments_seen = $(f).css('display');
-					if (comments_seen == 'none') {
-						$(f).slideDown('slow').css("display","block");
-						//filterShortComments();
-						
-					} else {
-						$(f).slideUp('slow');
+				/*	Toggle annotation link
+				_______________________________________________________________________________ */
+				
+				$('#annotation a').click(function()
+				{
+					$('#annotation p').toggle();
+					
+					if (commentOn == true) 
+					{
+						commentOn = false;
+						$('#mynewcomment').slideUp();
+					} 
+					else 
+					{
+						commentOn = true;
 					}
 					
+					return false;
 				});
-
+				
+				/*	Function to show the comment form
+				_______________________________________________________________________________ */
+				
+				function showCommentForm(clicked)
+				{
+					var thetitle = clicked.attr('title');
+					
+					if( !$('#thecomment').is(':visible') ) 
+					{
+						if (commentOn == true){
+							var sent_id = clicked.attr("id"); 
+							var par_id = clicked.attr("name");
+							clicked.after('<span id="mynewcomment"></span>');
+							var new_cmt_seen = $('#mynewcomment').css('display');
+							
+							if (new_cmt_seen == 'none') 
+							{
+								$('#mynewcomment').slideDown('fast').css("display","block"); //show()
+							} 
+							
+							$('#mynewcomment').load('/newcomment/' + sent_id + '&parent_type=' + thetitle + '&parent_id=' + par_id);  
+						}
+					} 
+					else {
+					    // it's visible so do nothing
+					}
+				}
+				
+				/*	Function to show all comments on a sentence
+				_______________________________________________________________________________ */
+				
+				function revealCommentList(clicked)
+				{
+					var f = clicked.nextUntil('.sentence','.comment');
+			
+					var comments_seen = $(f).css('display');
+					
+					if (comments_seen == 'none') 
+					{
+						$(f).slideDown('slow').css("display","block");	
+					} 
+					else 
+					{
+						$(f).slideUp('slow');
+					}
+				}
+								
+				/*	Main click event for sentences
+				_______________________________________________________________________________ */
+				
+				$('.marker, .sentence').click(function(){
+					if(commentOn)
+					{
+						showCommentForm($(this));
+					}
+					else
+					{
+						revealCommentList($(this));
+					}
+					
+					return false;
+				});
+				
+			
 				//HIDE SHORT COMMENTS
 				//currently set at 25 words or less.
 				function hideMyComments() {
-					console.log('hide my comments');
-					console.log(this);
+					//console.log('hide my comments');
+					//console.log(this);
 					var e = $("#"+this[0]);
 					var words = e.text().split(" ");
 					var wordcount = words.length;
-					console.log(e);
-					console.log(wordcount);
+					//console.log(e);
+					//console.log(wordcount);
 					var comments_seen = e.css('display');
 					if (comments_seen == 'none') {
-						console.log('comment cannot be seen');
+						//console.log('comment cannot be seen');
 							
 					} else {
-						console.log('i can be seen');
+						//console.log('i can be seen');
 						
 						 if ( wordcount < 25 ) {
-							console.log('less than 25 visible');
+							//console.log('less than 25 visible');
 						 	e.slideUp('slow');						 				 	
 						} else { 
-							console.log('more than 25');
+							//console.log('more than 25');
 						}
 					}
 				}
@@ -140,86 +207,17 @@
 				
 				$("#showShortComments").click(showShortComments);
 				
-				
-					
-				
-			
+
 				
 				//ON COMMENT_LENGTH CLICK, 
 				$('#short_comments').delegate("input:checkbox", "click", function(){		
-					//filterShortComments();
 					
-					// var arr = [];
-					// 					//create the array
-					// 					$('#thework')
-					// 					.find('span')
-					// 					.each(function(){ arr.push(this.id); });
-					// 					
-					// 					console.log('checkbox has been clicked');
-					// 						if (this.checked == true) {	
-					// 							//RUN HIDE COMMENTS
-					// 							jQuery.each(arr, hideMyComments
-					// 							)
-					// 							} else {
-					// 								jQuery.each(arr, showMyComments
-					// 								)	
-					// 							}
-					// 							
 					
 				});
 				
 				//PAGE_ID JQUERY VARIABLE
 				var myPage = <%= @paper.id.to_s %>;
 				//DEPRECATION ISSUE - DEBUG LATER
-				
-				//ANNOTATION TOGGLE
-				var commentOn = false;
-				
-				$('#annotation a').click(function(){
-					$('#annotation p').toggle();
-					if (commentOn == true) {
-						commentOn = false;
-						$('#mynewcomment').slideUp();
-					} else {
-					commentOn = true;
-					}
-					console.log('switch!');
-				
-				console.log('Your ability to comment is ' + commentOn);
-					//DO THE REST IN SINATRA
-				});	
-						
-				
-				//NEW COMMENT
-				// $('#newcmt').click(function(){
-				$('.sentence, .clickable').click(function(){
-					var thetitle = $(this).attr('title');
-					console.log('I AM A ' + thetitle);
-					if( !$('#thecomment').is(':visible') ) {
-						// it's not visible,
-						if (commentOn == true){
-							var sent_id = $(this).attr("id"); /////
-							var par_id = $(this).attr("name");
-							$(this).after('<span id="mynewcomment"></span>');
-							var new_cmt_seen = $('#mynewcomment').css('display');
-							//find .visible instead of .css(display)
-							if (new_cmt_seen == 'none') {
-								$('#mynewcomment').slideDown('fast').css("display","block"); //show()
-							} else {
-							}
-							console.log("about to load new comment" + sent_id + "and parent_id is" + par_id);
-							//load the newCommment page with sentence id & paper_id
-							//not sure if it's necessary to load the sentence and 
-							//paper id anymore.
-							//(pre-mark-butchering:)
-							// $('#mynewcomment').load('/newcomment/' + sent_id + '&paper_id=' + <%= @paper.id.to_s %>);   
-							$('#mynewcomment').load('/newcomment/' + sent_id + '&parent_type=' + thetitle + '&parent_id=' + par_id);  
-							// + sent_id + '&parent_id=' + <%= @paper.id.to_s %>) + '&parent_type=Paper' 
-						}
-					} else {
-					    // it's visible so do nothing
-					}
-				});
 
 				
 				//ADD BUTTONS TO CONTRIBUTORS
@@ -283,7 +281,6 @@
 						.find('span')
 						.each(function(){ arr.push(this.id); });
 						
-						//jQuery.each(arr, theDepth);
 						//FOR EACH IN THE ARRAY
 						$(arr).each(function(){
 							var e1 = $("#"+this[0]);
@@ -313,6 +310,7 @@
 						});
 						
 					});
+					//return false;
 				
 			});
 		</script>
@@ -345,8 +343,8 @@
 				<h3 align="center"><b>"so alpha it hurts"</b></h3>
 				<div id="annotation">
 					<a href="#">
-						<p>Commenting is OFF</p>
-						<p id="alt" style="display:none">Commenting is ON</p>
+						<p>Commenting is ON</p>
+						<p id="alt" style="display:none">Commenting is OFF</p>
 						</a>
 				</div>
 				<div id="comment_depth">
@@ -357,11 +355,6 @@
 						<!-- <li><a href="#" id="showFirstOrderComments">Show only first</a></li> -->
 						
 					</ul>
-					<!--><form>
-						<li><input type="radio" name="depth" value="comment_0" value="" />No Comments</li>
-						<li><input type="radio" name="depth" value="comment_1" />First Comments</li>
-						<li><input type="radio" name="depth" value="comment_all" />All Comments</li>
-					</form>-->
 				</div>
 				<div id="comment_length">
 					<h3>Comments Length</h3>
@@ -370,13 +363,6 @@
 						<li><a href="#" id="showShortComments">Show short comments</a></li>
 						
 					</ul>
-					<!-- <form id="short_comments">
-						<input type="checkbox" name="shrt_comments" value="shrt_comments" />25 Word Minimum<br />
-					</form>
-					-->
-					
-					<!-- <label for="amount">Minimum:</label>
-										<input type="range" name="range-slider" id="range-slider" class="slider" min="0" max="100" step="1" value="25"> -->
 				</div>
 				
 				<!-- "Contributors" section currently nonfunctional.
