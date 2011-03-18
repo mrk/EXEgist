@@ -24,8 +24,7 @@ There are additional features on the sidebar
 TODO
 --------
 
-- fix line spacing for <h2> and <h3> tag styling
-- add username to comments posted!
+- add username to comments immediately after posting!
 - we could probably stand to improve the instructions, both in terms of the text and by putting it somewhere besides the login page.
 
 
@@ -58,7 +57,6 @@ INSERTING FIRST ORDER COMMENTS
 INSERTING NTH ORDER COMMENTS
 
 - COMMENTS ON COMMENTS: The ultimate goal of this conversation space is to have comments on comments.  Semifunctional at the moment but still full of display, arrangement, and interaction bugs.
-	
 
 
 ==jQuery Issues
@@ -67,17 +65,16 @@ INSERTING NTH ORDER COMMENTS
 
 - COMMENT POSTS: Needs to be rewritten with the new db structure. 
 
+
+==Next Steps
+
+- COMMENT ON COMMENTS
+
 - CONTRIBUTORS SOLO: (Solo / Mute) The goal is when you click on the contributor solo button, it shows only the contributions from that user.  This is currently broken.  Example is on wallace.erb.  Preferably, when comments are added to a page, they have a class of the username.  The 'ul li' of that contributor has name as it's 'id'.  If the id == class, then show those comments, hide all others.  That's our current logic, but my guess: there is a better way.  There is an ability to 'solo' multiple contributors at once.  The mute button is the opposite effect, to hide the user, but it hasn't been touched yet.  
 
 - CONTRIBUTORS MUTE: Similar to solo(above) only it hides all the comments from that contributor.
 
 - CONTRIBUTORS HIGHLIGHT: When you you are in Read Comments mode, it.
-
-
-
-==Next Steps
-
-- COMMENT ON COMMENTS
 
 - CHANGE READ/POST STRUCTURE: This would remove the button on the left that switches from read comments to add post.  Instead, when you clicked on a sentence, it would open up the comments below it.  On the right side of the sentence, there would be a button that would open up a Post Comment form.
 
