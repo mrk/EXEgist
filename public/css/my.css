@@ -85,9 +85,10 @@ a{
  	background-color: #f6f2f5;
  	padding: 10px;
 	border: thin solid #c8c8c8;
+	position:fixed;
 	
 }
-#comment_depth, #comment_length, #contributors{
+#comment_depth, #comment_length, #contributors, #addendum{
 	min-height:50px;
 	border-style:1px solid black;
 	float: left;
